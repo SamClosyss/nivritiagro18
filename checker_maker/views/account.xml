@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--form view of account.move-->
+    <record id="account_move_form_view_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref='account.view_move_form'/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='invoice_date']" position="attributes">
+                <attribute name="required">True</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_set_checked']" position="replace">
+                <button name="button_set_checked" string="Set as Checked" type="object"
+                        groups="account.group_account_invoice" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button string="Send for Approval" name="action_send_for_approval" type="object" class="btn-primary"
+                        invisible="hide_post_button == False or state in ('posted', 'cancel')"/>
+                <button string="Approve" name="action_approve" type="object" class="btn-sm btn-success"
+                        invisible="approval_status != 'pending'"/>
+                <button string="Refuse" name="action_refuse" type="object" class="btn-sm btn-danger"
+                        invisible="approval_status != 'pending'"/>
+                <button string="Withdraw" name="action_withdraw" type="object" class="btn-sm btn-secondary"
+                        invisible="approval_status not in ('refused', 'approved')"/>
+                <field name="approval_status" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//page[last()]" position="after">
+                <page string="Approver(s)" name="approver_ids" invisible="not approver_ids">
+                    <field name="approver_ids">
+                        <list create="0" edit="0" delete="0">
+                            <field name="user_id"/>
+                            <field name="status"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+
+<!--    Approval Status not added in the system-->
+<!--    invisible="hide_post_button"-->
+    <record id="account_payment_form_view_inherit" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref='account.view_account_payment_form'/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_post']" position="replace">
+                <button name="action_post" string="Confirm" type="object" class="oe_highlight"
+                         data-hotkey="q"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+<!--                invisible="hide_post_button"-->
+                <button string="Send for Approval" name="action_send_for_approval" type="object" class="btn-primary"
+                        invisible="state in ('posted', 'cancel')"/>
+                <button string="Approve" name="action_approve_payment" type="object" class="btn-sm btn-success"
+                        invisible="approval_status != 'pending'"/>
+                <button string="Refuse" name="action_refuse_payment" type="object" class="btn-sm btn-danger"
+                        invisible="approval_status != 'pending'"/>
+                <button string="Withdraw" name="action_withdraw" type="object" class="btn-sm btn-secondary"
+                        invisible="approval_status not in ('refused', 'approved')"/>
+                <field name="approval_status" invisible="1"/>
+
+<!--                <field name="hide_post_button" invisible="1"/>-->
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

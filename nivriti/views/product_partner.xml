@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="product_template_inherit" model="ir.ui.view">
+        <field name="name">product.template_inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref='product.product_template_only_form_view'/>
+        <field name="arch" type="xml">
+
+            <xpath position="inside" expr="//header">
+                <button type="object" string="Send for approval" name="action_send_approval" class="btn-primary"
+                invisible="active == True or status == 'pending'"/>
+                <button type="object" string="Approve" name="action_approval" class="btn-primary"
+                        groups="base.group_erp_manager" invisible="active == True or status != 'pending'"/>
+                <field name="status" invisible="1"/>
+            </xpath>
+
+        </field>
+    </record>
+
+        <record id="res_partner_inherit" model="ir.ui.view">
+        <field name="name">res.partner_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref='base.view_partner_form'/>
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='website']" position="after">
+
+                    <field name="fssai_no"/>
+                </xpath>
+                <xpath expr="//div[@name='warning_tax']" position="before">
+                    <header>
+                        <button type="object" string="Send for approval" name="action_send_approval" class="btn-primary"
+                                invisible="active == True or status == 'pending'"/>
+                        <button type="object" string="Approve" name="action_approval" class="btn-sm btn-success"
+                                groups="base.group_erp_manager" invisible="active == True or status != 'pending'"/>
+                        <field name="status" invisible="1"/>
+                    </header>
+                </xpath>
+        </field>
+    </record>
+
+</odoo>

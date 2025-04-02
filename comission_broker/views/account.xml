@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+
+    <!--    Brokerage Report (account.move) Tree View-->
+    <!--    Creating a new tree view for account.move-->c
+    <record id="brokerage_report_tree_view" model="ir.ui.view">
+        <field name="name">Brokerage Report</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <list>
+                <header>
+                    <button name="action_create_bills" string="Create Bill" type="object"/>
+                </header>
+                <field name="name"/>
+                <field name="invoice_partner_display_name"/>
+                <field name="broker_id" optional="show"/>
+                <field name="brokerage_amt" optional="show"/>
+                <field name="brokerage_payable" optional="show"/>
+                <field name="brokerage_paid" optional="show"/>
+                <field name="brokerage_pending" optional="show"/>
+                <field name="exclude_for_brokerage" widget="boolean_toggle"/>
+                <field name="invoice_date" optional="hide"/>
+                <field name="invoice_date_due" optional="hide"/>
+                <field name="amount_untaxed_signed" optional="show"/>
+                <field name="amount_total_signed" optional="show"/>
+                <field name="amount_residual" optional="show"/>
+                <field name="amount_total_in_currency_signed" optional="show"/>
+                <field name="payment_state"/>
+                <field name="state"/>
+                <button string="View" name="action_view" type="object"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="inherit_view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">Inherit Search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="broker_id"/>
+            </xpath>
+            <xpath expr="//search/group" position="inside">
+                <separator/>
+                <filter string="Broker" name="broker_id" context="{'group_by': 'broker_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="brokerage_report_action" model="ir.actions.act_window">
+        <field name="name">Brokerage Report</field>
+        <field name="res_model">account.move</field>
+        <field name="view_id" ref="brokerage_report_tree_view"/>
+        <field name="domain">[('move_type', '=', 'out_invoice'),('brokerage_pending','>',0)]</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem name="Brokerage Report" id="brokerage_report" action="brokerage_report_action"
+              parent="account.menu_finance_receivables"/>
+
+    <!--    Ends Here-->
+    <record id="inherit_account_move_form" model="ir.ui.view">
+        <field name="name">Inherit Move Form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='other_info']/group/group[@name='accounting_info_group']"
+                   position="before">
+                <group string="Brokerage" name="brokerage_info" invisible="move_type not in ('out_invoice','out_refund')">
+                    <field name="broker_id" options="{'no_create':True}" invisible="move_type != 'out_invoice'"/>
+                    <field name="broker_type" invisible="move_type not in ('out_invoice','out_refund')"/>
+                    <field name="broker_value" invisible="move_type not in ('out_invoice','out_refund')"/>
+                    <field name="exclude_for_brokerage" widget="boolean_toggle" invisible="move_type not in ('out_invoice','out_refund')"/>
+                    <field name="brokerage_amt"/>
+                    <field name="brokerage_payable"/>
+                    <field name="brokerage_paid"/>
+                    <field name="brokerage_pending"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    account.payment form view-->
+    <record id="inherit_account_payment_form" model="ir.ui.view">
+        <field name="name">Inherit Move Form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_bank_id']" position="after">
+                <field name="exclude_for_brokerage" widget="boolean_toggle" readonly="state in ['cancel', 'posted']"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    search view of account.move.line-->
+    <!--    <record id="inherit_account_move_line_search" model="ir.ui.view">-->
+    <!--        <field name="name">account move line search</field>-->
+    <!--        <field name="model">account.move.line</field>-->
+    <!--        <field name="inherit_id" ref="account.view_account_move_line_filter"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="filter[@name='to_check']" position="after">-->
+    <!--                <separator/>-->
+    <!--                <filter string="Discount" name="broker_disc" domain="[('broker_type', '=', 'disc')]"/>-->
+    <!--                <filter string="Rate Difference" name="broker_diff" domain="[('broker_type', '=', 'rate_diff')]"/>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+
+    <!--    <record model="ir.ui.view" id="account_move_line_tree_views">-->
+    <!--        <field name="name">Invoice Lines</field>-->
+    <!--        <field name="model">account.move.line</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <tree>-->
+    <!--                <header>-->
+    <!--                    <button name="action_create_bills" string="Create Bills" type="object" class="oe-stat-button"/>-->
+    <!--                </header>-->
+    <!--                <field name="invoice_date"/>-->
+    <!--                <field name="move_name"/>-->
+    <!--                <field name="partner_id"/>-->
+    <!--                <field name="product_id"/>-->
+    <!--                <field name="broker_id"/>-->
+    <!--                <field name="broker_type"/>-->
+    <!--                <field name="broker_value"/>-->
+    <!--                <field name="brokerage_amt"/>-->
+    <!--                <field name="account_id"/>-->
+    <!--                <field name="journal_id"/>-->
+    <!--                <field name="exclude_for_brokerage" optional="hide" widget="boolean_toggle"/>-->
+    <!--                <field name="quantity"/>-->
+    <!--                <field name="price_unit"/>-->
+    <!--                <field name="status"/>-->
+    <!--                <field name="price_subtotal" string="Tax excl."/>-->
+    <!--                <field name="tax_ids" widget="many2many_tags"/>-->
+    <!--                <field name="broker_type"/>-->
+    <!--            </tree>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+
+    <!--    Inherited account.move.line search-->
+    <!--    <record id="view_account_move_line_filter_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">Move line filter Inherit</field>-->
+    <!--        <field name="model">account.move.line</field>-->
+    <!--        <field name="inherit_id" ref="account.view_account_move_line_filter"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//search/group" position="inside">-->
+    <!--                <filter string="Exclude Brokerage" name="group_by_exc_brokerage" domain="[]" context="{'group_by': 'exclude_for_brokerage'}"/>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+
+    <!--    </record>-->
+
+    <!--    <record id="action_move_line_account" model="ir.actions.act_window">-->
+    <!--        <field name="name">Invoice Lines</field>-->
+    <!--        <field name="res_model">account.move.line</field>-->
+    <!--        <field name="view_mode">tree,pivot</field>-->
+    <!--        <field name="domain">[('move_type', '=', 'out_invoice'), ('display_type', 'in', ('product','line_section', 'line_note'))]</field>-->
+    <!--    </record>-->
+
+    <!--    <menuitem id="account_move_line" name="Invoice Lines" action="action_move_line_account"-->
+    <!--              parent="account.menu_finance_receivables"/>-->
+
+    <record id="action_product_enquiry_form_view" model="ir.ui.view">
+        <field name="name">product.enquiry.form.view</field>
+        <field name="model">product.enquiry</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="account_move_line_ids" widget="many2many_tags" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_create_bills" type="object" class="btn btn-primary" string="Create Bills"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+
+        <record id="mail_template_of_delivery_views" model="mail.template">
+            <field name="name">Send Mail on delivery</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="subject">{{ object.company_id.name }} Delivery Order (Ref {{ object.name or 'n/a' }})</field>
+            <field name="partner_to">{{ object.partner_id.email and object.partner_id.id or
+                object.partner_id.parent_id.id }}
+            </field>
+            <!--        <field name="description">Sent to the customers when orders are delivered, if the setting is enabled</field>-->
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
+                        <br/>
+                        <br/>
+                        We are glad to inform you that your order has been placed.
+                        <!--        <t t-if="hasattr(object, 'carrier_tracking_ref') and object.carrier_tracking_ref">-->
+                        Your tracking reference is
+                        <t t-out="object.name">12345</t>
+                        <!--            <strong>-->
+                        <!--            <t t-if="object.name">-->
+                        <!--                <t t-set="multiple_carrier_tracking" t-value="object.get_multiple_carrier_tracking()"/>-->
+                        <!--                <t t-if="multiple_carrier_tracking">-->
+                        <!--                    <t t-foreach="multiple_carrier_tracking" t-as="line">-->
+                        <!--                        <br/><a t-att-href="line[1]" target="_blank" t-out="line[0] or ''"></a>-->
+                        <!--                    </t>-->
+                        <!--                </t>-->
+                        <!--                <t t-else="">-->
+                        <!--                    <a t-attf-href="{{ object.carrier_tracking_url }}" target="_blank" t-out="object.carrier_tracking_ref or ''"></a>.-->
+                        <!--                </t>-->
+                        <!--            </t>-->
+                        <!--            <t t-else="">-->
+                        <!--                <t t-out="object.carrier_tracking_ref or ''"></t>.-->
+                        <!--            </t>-->
+                        <!--            </strong>-->
+                        <!--        </t>-->
+                        <br/>
+                        <br/>
+                        Please find your delivery order attached for more details.
+                        <br/>
+                        <br/>
+                        Thank you,
+                        <t t-if="user.signature">
+                            <br/>
+                            <t t-out="user.signature or ''">--<br/>Mitchell Admin
+                            </t>
+                        </t>
+                    </p>
+                </div>
+            </field>
+            <field name="report_template_ids" eval="[(4, ref('stock.action_report_delivery'))]"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="mail_template_of_customer_vendor_approvals_view" model="mail.template">
+            <field name="name">Customer/Vendor Approval Request</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="subject">Approval Send for Partner .</field>
+            <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="email_to">soni.vinay722@gmail.com</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear IT Department
+                        <br/>
+                        <p>A partner approval request has been submitted for your review.</p>
+                        <p>Please review the partner details and take appropriate action.</p>
+                        <br/>
+                        Please checkout detail mentioned before for your reference:-
+                        <br/>
+                        Name:-
+                        <span style="font-weight:bold;" t-out="(object.name)"></span>
+                        <br/>
+                        <t t-if="object.email">
+                            Email ID:-
+                            <span style="font-weight:bold;" t-out="(object.email)"></span>
+                        </t>
+                        <br/>
+                        <t t-if="object.email">
+                            Tax ID:-
+                            <span style="font-weight:bold;" t-out="(object.vat)"></span>
+                        </t>
+                        <br/>
+                        <br/>
+                        Kindly Approve this record. Do not hesitate to contact us if you have any questions.
+                        <br/>
+                        <br/>
+                        Best regards,
+                        <p>Thank you.</p>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="mail_template_of_products_approvals_views" model="mail.template">
+            <field name="name">Product Approval Request</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="subject">Approval Send for Product .</field>
+            <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="email_to">soni.vinay722@gmail.com</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear IT Department
+                        <br/>
+                        <p>A product approval request has been submitted for your review.</p>
+                        <p>Please review the product details and take appropriate action.</p>
+                        <br/>
+                        Please checkout the detail of the product as follow:-
+                        <br/>
+                        Name:-
+                        <span style="font-weight:bold;" t-out="(object.name)"></span>
+                        <br/>
+                        <t t-if="object.default_code">
+                            SKU/Internal Reference :-
+                            <span style="font-weight:bold;" t-out="(object.default_code)"></span>
+                        </t>
+                        <br t-if="object.default_code"/>
+                        <t t-if="object.detailed_type">
+                            Product Type :-
+                            <span style="font-weight:bold;" t-out="(object.detailed_type)"></span>
+                        </t>
+                        <br t-if="object.detailed_type"/>
+                        <t t-if="object.l10n_in_hsn_code">
+                            HSN Code :-
+                            <span style="font-weight:bold;" t-out="(object.l10n_in_hsn_code)"></span>
+                        </t>
+                        <br t-if="object.l10n_in_hsn_code"/>
+                        Kindly Approve this record. Do not hesitate to contact us if you have any questions.
+                        <br/>
+                        <br/>
+                        Best regards,
+                        <p>Thank you.</p>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

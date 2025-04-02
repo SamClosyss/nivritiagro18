@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="approval_request_form_view_inherit" model="ir.ui.view">
+        <field name="name">approval.request.form.inherit</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref='approvals.approval_request_view_form'/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='approvers']/field[@name='approver_ids']/list/field[@name='required']" position="after">
+                <field name="model_name" column_invisible="1"/>
+                <field name="account_move_id" column_invisible="1"/>
+            </xpath>
+
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="view_approval_record" string="View Approval" class="oe_stat_button" type="object"/>
+                <field name="approval_type" invisible="1"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

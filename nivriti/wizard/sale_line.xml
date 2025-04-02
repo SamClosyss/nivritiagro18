@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="action_account_line_form" model="ir.ui.view">
+            <field name="name">account.line.wizard.form</field>
+            <field name="model">account.line.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+<!--                            MINIMUM-->
+                            <label for="min_price" string="Minimum:-"/>
+                            <div class="o_row g-0 d-flex" style="width=100%">
+                                <field name="min_price" readonly="1"/>
+                                <span invisible="other_detail == False" class="">
+                                    <span style="margin-left: -240px; padding: 0px;"> | </span>
+                                </span>
+                                <span invisible="other_detail == False" class="">
+                                    <field name="other_min_price" readonly="1" style="margin-left : -240px;"/>
+                                </span>
+                            </div>
+<!--                            MAXIMUM-->
+                            <label for="max_price" string="Maximum:-"/>
+                            <div class="o_row g-0 d-flex" style="width=100%">
+                                <field name="max_price" readonly="1"/>
+                                <span invisible="other_detail == False" class="">
+                                    <span style="margin-left: -240px; padding: 0px;"> | </span>
+                                </span>
+                                <span invisible="other_detail == False" class="">
+                                    <field name="other_max_price" readonly="1" style="margin-left : -240px;"/>
+                                </span>
+                            </div>
+<!--                            boolean field -->
+                            <field name="other_detail" widget="boolean_toggle"/>
+                        </group>
+
+                        <group>
+<!--                            latest price-->
+                            <label for="latest_price" string="Latest:-"/>
+                            <div class="o_row g-0 d-flex" style="width=100%">
+                                <field name="latest_price" readonly="1" />
+                                <div invisible="other_detail == False" class="o_row flex-grow-0">
+                                <span invisible="other_detail == False" class="">
+                                    <span style="margin-left: -240px; padding: 0px;"> | </span>
+                                </span>
+                                <span invisible="other_detail == False" class="">
+                                    <field name="other_latest_price" readonly="1" style="margin-left : -240px;"/>
+                                </span>
+                                </div>
+                            </div>
+<!--                            AVERAGE-->
+                            <label for="average_price" string="Average:-"/>
+                            <div class="o_row g-0 d-flex" style="width=100%">
+                                <field name="average_price" readonly="1"/>
+                                <div invisible="other_detail == False" class="o_row flex-grow-0">
+                                <span invisible="other_detail == False" class="">
+                                    <span style="margin-left: -240px; padding: 0px;"> | </span>
+                                </span>
+                                <span invisible="other_detail == False" class="">
+                                    <field name="other_average_price" readonly="1" style="margin-left : -240px;"/>
+                                </span>
+                                </div>
+                            </div>
+                        </group>
+                    </group>
+<!-- InOne2many fields below data/record will populate base on a selection field (record type) -->
+<!-- if main then data price if other than other price-->
+                    <notebook>
+                        <page string="Data Price">
+                            <field name="move_lines_ids" readonly="1" create="0" delete="0" edit="0">
+                                <tree editable="bottom">
+                                    <field name="date" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="description" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="qty" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="price" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="price_total" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other Price" invisible="other_detail == False">
+                            <field name="other_move_line_ids" readonly="1" create="0" delete="0" edit="0">
+                                <tree editable="bottom">
+                                    <field name="date" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="description" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="qty" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="price" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="price_total" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+     </record>
+
+<!--    action view of account_line_wizard -->
+    <record id="action_account_line_wizard" model="ir.actions.act_window">
+        <field name="name">History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.line.wizard</field>
+        <field name="view_mode">form</field>
+    </record>
+
+        <!--    form view of class stock.status-->
+     <record id="action_stock_status_form" model="ir.ui.view">
+        <field name="name">stock.status.form</field>
+        <field name="model">stock.status</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="quotation"/>
+                        <field name="outgoing"/>
+                    </group>
+                    <group>
+                        <field name="onhand"/>
+                        <field name="available"/>
+                    </group>
+                </group>
+                <!--   adding a one2many -->
+                <notebook>
+                    <page string="Locations" >
+                        <field name="location_ids" readonly="1" create="0" delete="0" edit="0">
+                            <tree editable="bottom">
+                                <field name="location_id"/>
+                                <field name="available"/>
+                                <field name="reserved"/>
+                                <field name="onhand_stock"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer/>
+            </form>
+        </field>
+     </record>
+
+<!--    action view of class stock.status-->
+    <record id="action_stock_status_wizard" model="ir.actions.act_window">
+        <field name="name">Product_availability</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.status</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

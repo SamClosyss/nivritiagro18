@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="email_delivery_form_view" model="ir.ui.view">
+        <field name="name">email.delivery.form.view</field>
+        <field name="model">email.delivery.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="subject"/>
+                        <field name="template_id"/>
+                        <field name="description" class="oe-bordered-editor" placeholder="Write your message here..."
+                               options="{'style-inline': true}"/>
+                        <field name="attach" filename="attachment"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_email_delivery" model="ir.actions.act_window">
+        <field name="name">Email Delivery</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">email.delivery.wizard</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

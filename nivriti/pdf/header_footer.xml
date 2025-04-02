@@ -1,0 +1,132 @@
+<odoo>
+    <template id="nivriti.header_footer">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <!--     Multi-company     -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <!--  Header   -->
+        <div class="header" style="font-family: Roboto; border-bottom: 0px solid black">
+            <div class="row">
+                <div class="col-12 md4 " style="padding-top: 60px;">
+                    <img style="width: 80px; height: 50px; align-self: text-start;" alt="img" t-if="company.logo"
+                         t-att-src="image_data_uri(company.logo)"/>
+                    <t t-if="dynamic_header == 'Purchase Order'">
+                        <span t-if="dynamic_header"
+                              style="margin-left: 30% ; margin-top: 50% ; font-size: 30px; font-weight:bold;">
+                            <span t-esc="dynamic_header"/>
+                        </span>
+                    </t>
+                    <t t-else="else">
+                        <span t-if="dynamic_header"
+                              style="margin-left: 30% ; margin-top: 50% ; font-size: 30px; font-weight:bold;">
+                            <span t-esc="dynamic_header"/>
+                        </span>
+                    </t>
+
+                    <img style="width: 70px; height: 30px; margin-left: 90%; margin-top: -8%" alt="img" t-if="company.logo"
+                         src="/nivriti/static/image/niv_second_logo.png"/>
+                </div>
+                <!--                <div class="col-8 text-start md4" style="padding-top: 50px;">-->
+                <!--                    <h1 t-if="dynamic_header"> <span t-esc="dynamic_header"/></h1>-->
+                <!--                </div>-->
+
+
+                <!--                <div class="col-8 md4 text-end" style="padding: 10px;">-->
+                <!--                    <p class="fw-bold mw-100" style="margin-bottom: -6px; font-size:22px">-->
+                <!--                        <span t-field="company.name" t-attf-style="color: {{ company.primary_color }};"/>-->
+                <!--                    </p>-->
+                <!--                    &lt;!&ndash;<div>&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                    <div class="row" style="margin-top: -25px">&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                        &lt;!&ndash;                          <div class="col-2"/>&ndash;&gt;&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                        <div class="col-12">&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                            <ol style="list-style-type: none; color: grey;">&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                &lt;!&ndash;                                  <li t-if="company.company_details" style="margin: 0; padding:0;">&ndash;&gt;&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                &lt;!&ndash;                                      <t t-esc="company.company_details" class="text-end" style="font-size: 6px !important; margin: 0 !important; padding: 0 !important;"/>&ndash;&gt;&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                &lt;!&ndash;                                  </li>&ndash;&gt;&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                <li t-if="company.tag_line">&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                    <span t-field="company.tag_line"/>&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                </li>&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                <li t-if="company.company_registry">&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                    CIN No:&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                    <t t-esc="company.company_registry"&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                       style="margin-top: -5px !impo; padding: 0 !important; font-size: 6px !important;"/>&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                                </li>&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                            </ol>&ndash;&gt;-->
+
+                <!--                    &lt;!&ndash;                        </div>&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+
+                <!--                    &lt;!&ndash;</div>&ndash;&gt;-->
+                <!--                    <div style="padding: 0px; font-size:13px">-->
+                <!--                        <span class="" t-if="company.street" t-field="company.street"/>-->
+                <!--                        <br/>-->
+                <!--                        <span class="" t-if="company.street2" t-field="company.street2"/>-->
+                <!--                        <br/>-->
+                <!--                        <span class="" t-if="company.city" t-field="company.city"/>-->
+                <!--                        <span class="" t-if="company.zip" t-field="company.zip"/>-->
+                <!--                        <span class="" t-if="company.state_id" t-field="company.state_id"/>-->
+                <!--                        <br/>-->
+                <!--                        <i class="oi oi-voip" style="font-size:15px"/>:-->
+                <!--                        <span class="" t-if="company.mobile" t-field="company.mobile"/> | -->
+                <!--                        <i class="fa fa-envelope" style="font-size:15px"/>:-->
+                <!--                        <span t-if="company.email" t-field="company.email"/>-->
+                <!--                        <br/>-->
+                <!--                        <span class="fw-bold">Website:</span>-->
+                <!--                        <span t-if="company.website" t-field="company.website"/>-->
+                <!--                        <br/>-->
+                <!--                        <span class="fw-bold">GSTIN/UIN:</span>-->
+                <!--                        <span t-if="company.vat" t-field="company.vat"/>-->
+                <!--                        <br/>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
+            <!--            <hr style="width:100%; text-align:center;margin-left:0; color:solid black; height:4px" />-->
+        </div>
+
+
+        <div t-attf-class="article o_report_layout_boxed o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+             t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+            </div>
+            <t t-out="0"/>
+        </div>
+
+        <!--  Footer  -->
+        <div t-attf-class="footer o_standard_footer">
+
+            <div class="text-center" style="border-top: 0px solid black;">
+                <!--                <div>-->
+                <!--                    <span class="" t-if="company.street" t-field="company.street"/>-->
+                <!--                    <span class="" t-if="company.street2" t-field="company.street2"/>-->
+                <!--                    <span class="" t-if="company.city" t-field="company.city"/>-->
+                <!--                    <span class="" t-if="company.zip" t-field="company.zip"/>-->
+                <!--                    <span class="" t-if="company.state_id.name" t-field="company.zip"/>-->
+                <!--                </div>-->
+                <!--                &lt;!&ndash;                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>&ndash;&gt;-->
+                <!--                <i class='oi oi-voip' style='font-size:15px'/>:-->
+                <!--                <span class="" t-if="company.mobile" t-field="company.mobile"/>&#160;|&#160;-->
+                <!--                <i class='fa fa-envelope' style='font-size:15px'/>:-->
+                <!--                <span t-if="company.email" t-field="company.email"/>&#160;|&#160;-->
+                <!--                <span>W:&#160;</span>-->
+                <!--                <i class="fa fa-globe-pointer"></i>-->
+                <!--                <span t-if="company.website" t-field="company.website"/>-->
+                <!--                <div class="text-end" style="margin-top: -25px"><span class="page"/>/-->
+                <!--                    <span class="topage"/>-->
+                <!--                </div>-->
+            </div>
+        </div>
+    </template>
+</odoo>

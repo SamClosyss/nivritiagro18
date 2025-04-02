@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="sale_order_inherit" model="ir.ui.view">
+        <field name="name">sale.order.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref='sale.view_order_form'/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/list/field[last()]"
+                   position="after">
+                <button name="action_product_history" type="object" icon="fa-indent" title="Sale History"
+                    invisible="state in ('cancel',)"/>
+                <button name="action_stock_update" type="object" icon="fa-clipboard" title="Stock update"
+                        invisible="state in ('cancel',)"/>
+            </xpath>
+
+
+
+            <xpath expr="//field[@name='validity_date']" position="after">
+                <field name="client_order_ref" string="PO No"/>
+                <field name="po_date" />
+            </xpath>
+
+            <xpath expr="//page[@name='other_information']//group/field[@name='client_order_ref']" position="replace">
+                <field name="client_order_ref" invisible="1"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="sale_order_line_inherit" model="ir.ui.view">
+        <field name="name">sale.order.line.inherit</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref='sale.view_sales_order_line_filter'/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//filter[@name='to_invoice']" position="after">
+                <filter name="yet" string="Yet To Delivered" domain="[('delivery_status', '=', 'yet')]"/>
+                <filter name="partial" string="Partially Delivered" domain="[('delivery_status', '=', 'partial')]"/>
+                <filter name="fully" string="Fully Delivered" domain="[('delivery_status', '=', 'fully')]"/>
+                <filter name="upselling" string="Yet To Invoiced" domain="[('invoice_status', '=', 'upselling')]"/>
+                <filter name="invoice" string="Invoice" domain="[('invoice_status', '=', 'invoice')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_line_tree_inherit" model="ir.ui.view">
+        <field name="name">sale_line_tree_inherit</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price_subtotal']" position="after">
+                <field name="delivery_status"/>
+                <field name="invoice_status"/>
+                <field name="state"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_line_custom_view" model="ir.actions.act_window">
+        <field name="name">Sale Order Line</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_mode">list,pivot</field>
+    </record>
+
+    <menuitem name="Sale Order Line" id="sale_order_line_menu" action="sale_order_line_custom_view"
+              parent="sale.sale_order_menu"/>
+
+</odoo>

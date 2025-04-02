@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="module_product_access" model="ir.module.category">
+        <field name="name">Product Access</field>
+        <field name="description">Access Category for Product</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="create_and_view_access_of_product" model="res.groups">
+        <field name="name">Create and View</field>
+        <field name="category_id" ref="module_product_access"/>
+    </record>
+
+    <record id="all_access_of_product" model="res.groups">
+        <field name="name">All</field>
+        <field name="category_id" ref="module_product_access"/>
+        <field name="implied_ids" eval="[(4, ref('create_and_view_access_of_product'))]"/>
+    </record>
+
+</odoo>

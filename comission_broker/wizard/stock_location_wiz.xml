@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <record id="stock_location_wiz_form" model="ir.ui.view">
+        <field name="name">Stock Location</field>
+        <field name="model">stock.location.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="location_id" options="{'no_open':True,'no_create':True}" domain="[('usage','=','internal')]"/>
+                        <field name="dest_location_id" readonly="1" options="{'no_open':True,'no_create':True}" domain="[('usage','=','internal')]"/>
+                    </group>
+                    <notebook>
+                        <page string="Operations">
+                            <field name="stock_location_line_id" widget="one2many">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="product_uom_qty"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="create_transfer" string="Create Transfer" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

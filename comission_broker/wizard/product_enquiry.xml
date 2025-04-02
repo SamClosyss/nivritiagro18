@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="action_product_enquiry_form_view" model="ir.ui.view">
+    <field name="name">product.enquiry.form.view</field>
+    <field name="model">product.enquiry</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+                    </group>
+                    <group>
+                        <field name="account_move_ids" widget="many2many_tags" invisible="1"/>
+<!--                        <field name="account_move_line_ids" widget="many2many_tags" invisible="1"/>-->
+                    </group>
+                </group>
+            </sheet>
+            <footer>
+                <button name="action_create_bills" type="object" class="btn btn-primary" string="Create Bills"/>
+            </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+</odoo>

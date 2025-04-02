@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <record id="view_archived_tag_move_tree" model="ir.ui.view">
+        <field name="name">gross.tds.reports.tree</field>
+        <field name="model">gross.tds.report</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Journal Items" create="false" edit="true" multi_edit="1" sample="1">
+                <field name="date" readonly="1"/>
+                <field name="partner_id" optional="show"/>
+                <field name="pan_no" optional="show"/>
+                <field name="move_name" string="Journal Entry" widget="open_move_widget"/>
+                <field name="company_currency_id" optional="hide"/>
+                <field name="company_id" optional="hide"/>
+                <field name="move_line_id" column_invisible="True"/>
+                <field name="tax_line_id" optional="show" readonly="1"/>
+                <field name="debit" sum="Total Debit" readonly="1"/>
+                <field name="credit" sum="Total Credit" readonly="1"/>
+                <field name="gross_amount" sum="Total Gross" readonly="1"/>
+                <field name="tax_tag_id" string="Tax Grids" widget="many2many_tags" optional="show"/>
+                <!--                    <field name="tax_tag_id" string="Tax Grids" domain="[('applicability', '=', 'taxes')]" widget="many2many_tags" optional="hide"/>-->
+                <!--                    <field name="tax_line_id" string="Originator Tax" optional="hide" readonly="1"/>-->
+                <!--                    <field name="invoice_date" string="Invoice Date" optional="hide"/>-->
+                <!--                    <field name="company_id" column_invisible="True"/>-->
+                <!--                    <field name="company_id" groups="base.group_multi_company" readonly="1" optional="hide"/>-->
+                <!--                    <field name="journal_id" readonly="1" options='{"no_open":True}' optional="hide"/>-->
+                <!--                    <field name="account_id" options="{'no_open': True, 'no_create': True}" domain="[('company_id', 'parent_of', company_id), ('deprecated', '=', False)]" groups="account.group_account_readonly"/>-->
+                <!--                    <field name="ref" optional="hide" readonly="False"/>-->
+                <!--                    <field name="product_id" readonly="1" optional="hide"/>-->
+                <!--                    <field name="amount_currency" groups="base.group_multi_currency" optional="show" readonly="1" invisible="is_same_currency"/>-->
+                <!--                    <field name="currency_id" groups="base.group_multi_currency" optional="hide" string="Currency" readonly="1" invisible="is_same_currency"/>-->
+                <!--                    <field name="discount_date" string="Discount Date" optional="hide" />-->
+                <!--                    <field name="discount_amount_currency" string="Discount Amount" optional="hide" />-->
+                <!--                    <field name="date_maturity" readonly="1" optional="hide"/>-->
+                <!--                    <field name="balance" sum="Total Balance" optional="hide" readonly="1"/>-->
+                <!--                    <field name="matching_number" readonly="1" optional="show"/>-->
+                <!--                    <field name="amount_residual" sum="Total Residual" string="Residual" optional="hide" readonly="1" invisible="not is_account_reconcile"/>-->
+                <!--                    <field name="amount_residual_currency" sum="Total Residual in Currency" string="Residual in Currency" optional="hide" readonly="1" invisible="is_same_currency or not is_account_reconcile"/>-->
+                <!--                    <field name="analytic_distribution" widget="analytic_distribution"-->
+                <!--                           groups="analytic.group_analytic_accounting"-->
+                <!--                           optional="show"-->
+                <!--                           options="{'product_field': 'product_id', 'account_field': 'account_id', 'force_applicability': 'optional'}"-->
+                <!--                           />-->
+
+                <!--                    <field name="move_type" column_invisible="True"/>-->
+                <!--                    <field name="parent_state" column_invisible="True   "/>-->
+                <!--                    <field name="account_type" column_invisible="True"/>-->
+                <!--                    <field name="statement_line_id" column_invisible="True"/>-->
+                <!--                    <field name="company_currency_id" column_invisible="True"/>-->
+                <!--                    <field name="is_same_currency" column_invisible="True"/>-->
+                <!--                    <field name="is_account_reconcile" column_invisible="True"/>-->
+                <!--                    <field name="sequence" column_invisible="True"/>-->
+                <!--                    <groupby name="partner_id">-->
+                <!--                        <button name="edit" type="edit" icon="fa-edit" title="Edit"/>-->
+                <!--                    </groupby>-->
+            </tree>
+        </field>
+    </record>
+
+
+
+    <record id="action_account_moves_all_tree" model="ir.actions.server">
+        <field name="name">Journal Items For TDS</field>
+        <field name="model_id" ref="tds_gross_report_by_closyss.model_gross_tds_report"/>
+        <field name="state">code</field>
+        <field name="code">action = model._compute_move_line()</field>
+    </record>
+
+
+    <menuitem id="menu_action_account_tds_gross_report" name="TDS Gross Report"
+              action="action_account_moves_all_tree"
+              parent="account.account_reports_legal_statements_menu" sequence="50"/>
+
+
+
+</odoo>

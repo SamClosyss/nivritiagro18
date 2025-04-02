@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_company_checker_maker_config" model="ir.ui.view">
+        <field name="name">res_company_checker_maker_config</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='branches']" position="after">
+                <page name="Approvals">
+                    <group>
+                        <group>
+                            <field name="invoice_approval"/>
+                            <field name="bills_approval"/>
+                            <field name="journal_entry_approval"/>
+                        </group>
+                        <group>
+                            <field name="receipt_approval"/>
+                            <field name="payment_approval"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

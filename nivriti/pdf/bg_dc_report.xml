@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="bg_invoice_format" model="report.paperformat">
+        <field name="name">Tax Invoice</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">26</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="bg_pdf_dc_report" model="ir.actions.report">
+        <field name="name">Delivery Slip (With Logo)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">nivriti.dc_report</field>
+        <field name="report_file">nivriti.dc_report</field>
+        <field name="print_report_name">(object.state in ('draft', 'sent') and 'Delivery Slip - %s' % (object.name) or
+            'Delivery slip - %s' % (object.name))
+        </field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="paperformat_id" ref="nivriti.bg_invoice_format"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="dc_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="dynamic_header" t-value="'Delivery Challan'"/>
+
+                <t t-call="nivriti.header_footer">
+                    <style>
+                        .header_text{
+                        font-size: 14px;
+                        }
+                        .content_text{
+                        font-size: 13px;
+                        }
+                        .center_text{
+                        text-align: center;
+                        }
+                        .table-sm tbody tr {
+                        height: 6px;
+                        }
+                    </style>
+                    <div class="page"
+                         style="font-family: Roboto ! important; border 3px solid black  ! important;">
+                        <!--                        <table style="width:100%; border: 2px solid black">-->
+                        <!--                            <tr>-->
+                        <!--                                <center colspan="3">-->
+                        <!--                                    <span style="font-size: 150%;">Delivery Challan</span>-->
+                        <!--                                </center>-->
+                        <!--                            </tr>-->
+                        <!--                        </table>-->
+
+                        <table style="border-collapse: collapse; width: 100%" class="avoid-page-break-inside">
+                            <tr>
+                                <td style="border: 1px solid;width:33.33%; padding: 3px; background-color: white; vertical-align:top;"
+                                    colspan="4">
+                                    <strong class="content_text">Challan From</strong>
+                                    <div>
+                                        <b>
+                                            <span class="" t-if="doc.company_id"
+                                                  t-field="doc.company_id.name"/>
+                                        </b>
+                                        <br t-if="doc.company_id"/>
+                                        <span class="" t-if="doc.company_id.street"
+                                              t-field="doc.company_id.street"/>
+                                        <br t-if="doc.company_id.street"/>
+                                        <span class="" t-if="doc.company_id.street2"
+                                              t-field="doc.company_id.street2"/>
+                                        <br t-if="doc.company_id.street2"/>
+                                        <span class="" t-if="doc.company_id.city"
+                                              t-field="doc.company_id.city"/>
+                                        <span class="" t-if="doc.company_id.zip"
+                                              t-field="doc.company_id.zip"/>
+                                        <br t-if="doc.company_id.zip"/>
+                                        <span t-if="doc.company_id.state_id"
+                                              t-field="doc.company_id.state_id"/>
+                                        <br t-if="doc.company_id.state_id"/>
+                                        <span t-if="doc.company_id.mobile">
+                                            <i class='oi oi-voip' style='font-size:15px'/>
+                                        </span>
+                                        <span t-if="doc.company_id.mobile" t-field="doc.company_id.mobile"/>
+                                        <br t-if="doc.company_id.mobile"/>
+
+                                        <span t-if="doc.company_id.email">
+                                            <i class='fa fa-envelope' style='font-size:15px'/>
+                                        </span>
+                                        <span t-if="doc.company_id.email" t-field="doc.company_id.email"/>
+                                        <br t-if="doc.company_id.email"/>
+
+                                        <span t-if="doc.company_id.vat"
+                                        >GSTIN:
+                                        </span>
+                                        <span t-if="doc.company_id.vat" t-field="doc.company_id.vat"/>
+                                    </div>
+                                </td>
+                                <td style="border: 1px solid;width:33.33%;padding: 3px;  background-color: white; vertical-align:top;"
+                                    colspan="5">
+                                    <strong class="content_text">Challan to</strong>
+                                    <div>
+                                        <b>
+                                            <span class="" t-if="doc.partner_id"
+                                                  t-field="doc.partner_id.name"/>
+                                        </b>
+                                        <br t-if="doc.partner_id"/>
+                                        <span class="" t-if="doc.partner_id.street"
+                                              t-field="doc.partner_id.street"/>
+                                        <br t-if="doc.partner_id.street"/>
+                                        <span class="" t-if="doc.partner_id.street2"
+                                              t-field="doc.partner_id.street2"/>
+                                        <br t-if="doc.partner_id.street2"/>
+                                        <span class="" t-if="doc.partner_id.city"
+                                              t-field="doc.partner_id.city"/>
+                                        <span class="" t-if="doc.partner_id.zip"
+                                              t-field="doc.partner_id.zip"/>
+                                        <br t-if="doc.partner_id.zip"/>
+                                        <span t-if="doc.partner_id.state_id"
+                                              t-field="doc.partner_id.state_id"/>
+                                        <br t-if="doc.partner_id.state_id"/>
+                                        <span t-if="doc.partner_id.mobile">
+                                            <i class='oi oi-voip' style='font-size:15px'/>
+                                        </span>
+                                        <span t-if="doc.partner_id.mobile" t-field="doc.partner_id.mobile"/>
+                                        <br t-if="doc.partner_id.mobile"/>
+
+                                        <span t-if="doc.partner_id.email">
+                                            <i class='fa fa-envelope' style='font-size:15px'/>
+                                        </span>
+                                        <span t-if="doc.partner_id.email" t-field="doc.partner_id.email"/>
+                                        <br t-if="doc.partner_id.email"/>
+
+                                        <span t-if="doc.partner_id.vat"
+                                        >GSTIN:
+                                        </span>
+                                        <span t-if="doc.partner_id.vat" t-field="doc.partner_id.vat"/>
+                                    </div>
+                                </td>
+                                <td style="border: 1px solid; background-color: white;width:33.33%;padding: 3px;vertical-align:top;"
+                                    colspan="4">
+                                    <strong class="content_text">Shipped to</strong>
+                                    <div>
+                                        <b>
+                                            <span class="" t-if="doc.partner_id"
+                                                  t-field="doc.partner_id.name"/>
+                                        </b>
+                                        <br t-if="doc.partner_id"/>
+                                        <span class="" t-if="doc.partner_id.street"
+                                              t-field="doc.partner_id.street"/>
+                                        <br t-if="doc.partner_id.street"/>
+                                        <span class="" t-if="doc.partner_id.street2"
+                                              t-field="doc.partner_id.street2"/>
+                                        <br t-if="doc.partner_id.street2"/>
+                                        <span class="" t-if="doc.partner_id.city"
+                                              t-field="doc.partner_id.city"/>
+                                        <span class="" t-if="doc.partner_id.zip"
+                                              t-field="doc.partner_id.zip"/>
+                                        <br t-if="doc.partner_id.zip"/>
+                                        <span t-if="doc.partner_id.state_id"
+                                              t-field="doc.partner_id.state_id"/>
+                                        <br t-if="doc.partner_id.state_id"/>
+                                        <span t-if="doc.partner_id.mobile">
+                                            <i class='oi oi-voip' style='font-size:15px'/>
+                                        </span>
+                                        <span t-if="doc.partner_id.mobile" t-field="doc.partner_id.mobile"/>
+                                        <br t-if="doc.partner_id.mobile"/>
+
+                                        <span t-if="doc.partner_id.email">
+                                            <i class='fa fa-envelope' style='font-size:15px'/>
+                                        </span>
+                                        <span t-if="doc.partner_id.email" t-field="doc.partner_id.email"/>
+                                        <br t-if="doc.partner_id.email"/>
+
+                                        <span t-if="doc.partner_id.vat"
+                                        >GSTIN:
+                                        </span>
+                                        <span t-if="doc.partner_id.vat" t-field="doc.partner_id.vat"/>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid;  background-color: white; vertical-align:top; padding: 3px; "
+                                    colspan="4">
+                                    <t t-if="doc.name">
+                                        <strong style="padding: 0px" class="header_text">DC Number:</strong>
+                                    </t>
+                                    <span t-esc="doc.name" class="content_text" style="padding: 5px"/>
+                                    <br/>
+
+                                    <t t-if="doc.date">
+                                        <strong style="padding: 0px" class="header_text">DC Date:</strong>
+                                    </t>
+                                    <span t-esc="doc.date" t-options="{'widget': 'date'}" class="content_text"
+                                          style="padding: 5px"/>
+                                </td>
+                                <td style="border: 1px solid;  background-color: white; vertical-align:top; padding: 3px; "
+                                    colspan="5">
+                                    <t>
+                                        <strong style="padding: 0px" class="header_text">SO Number:</strong>
+                                    </t>
+                                    <span t-if="doc.sale_id" t-esc="doc.sale_id.name" class="content_text"
+                                          style="padding: 5px"/>
+                                    <br/>
+
+                                    <t>
+                                        <strong style="padding: 0px" class="header_text">SO Date:</strong>
+                                    </t>
+                                    <!--                                    <span t-esc="doc.delivery_date" t-options="{'widget': 'date'}" class="content_text"-->
+                                    <!--                                          style="padding: 0px"/>-->
+
+                                </td>
+
+                                <td style="border: 1px solid;  background-color: white; vertical-align:top;padding: 3px; "
+                                    colspan="4">
+                                    <t>
+                                        <strong style="padding: 0px" class="header_text">PO Number:</strong>
+                                    </t>
+                                    <span t-if="doc.purchase_id.name" t-esc="doc.purchase_id.name" class="content_text"
+                                          style="padding: 5px"/>
+                                    <br/>
+
+                                    <t>
+                                        <strong style="padding: 0px" class="header_text">PO Date:</strong>
+                                    </t>
+                                    <span t-esc="doc.purchase_id.date_approve" t-options="{'widget': 'date'}"
+                                          class="content_text"
+                                          style="padding: 0px"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table t-if="doc.state" style="border-collapse: collapse; width: 100%"
+                               class="avoid-page-break-inside">
+                            <thead>
+                                <tr>
+                                    <th width="5%" name="th_sm_sr">
+                                        <strong>Sr No</strong>
+                                    </th>
+                                    <th width="10%" name="th_sm_quantity">
+                                        <strong>Qty</strong>
+                                    </th>
+                                    <th width="10%" name="th_sm_quantity">
+                                        <strong>Batch No.</strong>
+                                    </th>
+                                    <th width="10%" name="th_sm_quantity">
+                                        <strong>Identification</strong>
+                                    </th>
+                                    <th width="25%" name="th_sm_product">
+                                        <!--                                    <strong>Product</strong>-->
+                                        <strong>Product Name</strong>
+                                    </th>
+                                    <th width="10%" name="th_sm_ordered">
+                                        <strong>Barcode</strong>
+                                    </th>
+                                    <th width="10%" name="th_sm_ordered">
+                                        <strong>HSN</strong>
+                                    </th>
+                                    <th width="15%" name="th_sm_ordered">
+                                        <strong>MRP</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="lines" t-value="doc.move_ids.filtered(lambda x: x.product_uom_qty)"/>
+                                <t t-set="total_qty" t-value="0"/>
+                                <tr height="4px" t-foreach="lines" t-as="move" style="padding: 0px">
+                                    <td class="text-center"
+                                        style="border: 1px solid ;padding-left:2px; padding-right:2px; ">
+                                        <span t-esc="move_index+1" class="content_text"/>
+                                        <t t-set="total_items" t-value="move_index+1"/>
+                                    </td>
+                                    <td class="text-center"
+                                        style="border: 1px solid ;padding-left:2px; padding-right:2px; ">
+                                        <span t-field="move.quantity" class="content_text">3.00</span>
+                                        <t t-set="total_qty" t-value="total_qty+move.quantity"/>
+                                        <!--                                        <span t-field="move.sale_line_id.product_uom"/>-->
+                                        <!--                                        &lt;!&ndash;                                    <span t-field="move.product_uom">units</span>&ndash;&gt;-->
+                                        <!--                                        <span t-if="move.product_packaging_id">-->
+                                        <!--                                            (-->
+                                        <!--                                            <span t-field="move.product_packaging_quantity"-->
+                                        <!--                                                  t-options="{&quot;widget&quot;: &quot;integer&quot;}"/>-->
+                                        <!--                                            <span t-field="move.product_packaging_id"/>)-->
+                                        <!--                                        </span>-->
+                                    </td>
+                                    <td class="text-start"
+                                        style="border: 1px solid ;padding-left:2px; padding-right:2px; ">
+                                        <!--                                        <span t-field="move.product_id">Customizable Desk</span>-->
+                                        <!--                                        <p t-if="move.description_picking != move.product_id.name and move.description_picking != move.product_id.display_name">-->
+                                        <!--                                            <span t-field="move.description_picking">Description on transfer</span>-->
+                                        <!--                                        </p>-->
+                                        <t t-set="has_serial_number" t-value="False"/>
+                                        <t t-set="has_serial_number" t-value="doc.move_line_ids.mapped('lot_id')"/>
+                                        <t t-if="has_serial_number">
+                                            <!--                                            <span>LOT/Serial NO.:</span>-->
+                                            <t t-foreach="move.move_line_ids" t-as="lot">
+                                                <!--                                                <span t-if="lot_index > 0">,</span>-->
+                                                <t t-if="lot.lot_id.name">
+                                                    <br t-if="lot_index > 0"/>
+                                                    <span t-esc="lot.lot_id.name" class="content_text"/>
+                                                    <!--                                                <span class="content_text"-->
+                                                    <!--                                                      t-field="lot.expiration_date"-->
+                                                    <!--                                                      t-options="{'format': 'dd/MM/yyyy'}"/>-->
+                                                    <span t-if="lot.quantity">-</span>
+                                                    <span class="content_text"
+                                                          t-field="lot.quantity"/>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </td>
+                                    <td style="border: 1px solid ;padding-left:2px; padding-right:2px; "
+                                        class="text-start">
+                                        <span t-esc="move.product_id.default_code" class="content_text"/>
+                                    </td>
+                                    <td class="text-start"
+                                        style="border: 1px solid ;padding-left:2px; padding-right:2px; ">
+                                        <span t-field="move.product_id.name" class="content_text">Customizable Desk
+                                        </span>
+                                    </td>
+                                    <td class="text-start"
+                                        style="border: 1px solid ;padding-left:2px; padding-right:2px; ">
+                                        <span t-esc="move.product_id.barcode" class="content_text"/>
+                                    </td>
+                                    <td class="text-start"
+                                        style="border: 1px solid ;padding-left:2px; padding-right:2px; ">
+                                        <!--                                    <span t-field="move.product_uom_qty">3.00</span>-->
+                                        <!--                                    <span t-field="move.product_uom">units</span>-->
+                                        <!--                                    <span t-if="move.product_packaging_id">-->
+                                        <!--                                        (-->
+                                        <!--                                        <span t-field="move.product_packaging_qty"-->
+                                        <!--                                              t-options="{&quot;widget&quot;: &quot;integer&quot;}"/>-->
+                                        <!--                                        <span t-field="move.product_packaging_id"/>)-->
+                                        <!--                                    </span>-->
+                                        <span t-field="move.product_id.l10n_in_hsn_code" class="content_text"></span>
+                                    </td>
+                                    <td class="text-end"
+                                        style="border: 1px solid ;padding-left:2px; padding-right:2px; ">
+                                        <span t-esc="move.product_id.lst_price" class="content_text"/>
+                                        <span>/</span>
+                                        <span t-field="move.product_uom.category_id.name" class="content_text"/>
+                                        <!--                                    <span t-field="move.product_uom">units</span>-->
+                                        <span t-if="move.product_packaging_id">
+                                            (
+                                            <span t-field="move.product_packaging_quantity"
+                                                  t-options="{&quot;widget&quot;: &quot;integer&quot;}"/>
+                                            <span t-field="move.product_packaging_id"/>)
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6">
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <span>Total Items:-</span>
+                                                <br/>
+                                                <span>Total Qty:-</span>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <span t-esc="total_items"/>
+                                                <br/>
+                                                <span t-esc="total_qty"/>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="clearfix mb-1 mt-1">
+                            <div class="row">
+                                <div class="col-9" style="padding: 0px">
+                                    <!--                                    <table style="width: 100%; border-collapse: collapse; page-break-inside: avoid;">-->
+                                    <!--                                        &lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                            <td class="content_text" colspan="12" style="border: 1px solid">&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                                <strong style=" padding: 5px" class="header_text">Amount Chargeable (in&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                                    words) :&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                                </strong>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                    <t t-if="doc.currency_id.name == 'INR'">&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                        <strong class="content_text" style="text-transform: capitalize;"&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                                t-esc="doc.amt.replace(',', '')"/> &ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                                <strong class="content_text" style="text-transform: capitalize;"&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                                        t-esc="doc.convert_num_to_text(doc.amount_total,doc.currency_id.currency_unit_label, doc.currency_id.currency_subunit_label)"/>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                        <strong class="content_text">Paise only</strong>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                    </t>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                    <t t-else="">&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                        <strong class="content_text"&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                                t-esc="doc.currency_id.amount_to_text(doc.amount_total).replace(',', '')"/>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                        <strong class="content_text">only</strong>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                    </t>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                            </td>&ndash;&gt;-->
+                                    <!--                                        &lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                                    <!--                                        <tr>-->
+                                    <!--                                            <th style="border: 1px solid" rowspan="2">-->
+                                    <!--                                                <strong style=" padding: 2px" class="header_text">Sr. No</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th style="border: 1px solid" rowspan="2" colspan="3">-->
+                                    <!--                                                <strong style=" padding: 2px" class="header_text">HSN/SAC</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th style="border: 1px solid" rowspan="2">-->
+                                    <!--                                                <strong style=" padding: 2px" class="header_text">Taxable Value-->
+                                    <!--                                                </strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th colspan="2" style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 2px" class="header_text">Central Tax-->
+                                    <!--                                                </strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th colspan="2" style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 2px" class="header_text">State Tax</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th colspan="2" style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 2px" class="header_text">IGST Tax</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th style="border: 1px solid" rowspan="2">-->
+                                    <!--                                                <strong style=" padding: 2px" class="header_text">Total Tax Amt-->
+                                    <!--                                                </strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                        </tr>-->
+                                    <!--                                        <tr>-->
+                                    <!--                                            &lt;!&ndash;                            CGST &ndash;&gt;-->
+                                    <!--                                            <th style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 5px" class="header_text">Rate</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 5px" class="header_text">Amount</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            &lt;!&ndash;                            SGST &ndash;&gt;-->
+                                    <!--                                            <th style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 5px" class="header_text">Rate</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 5px" class="header_text">Amount</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            &lt;!&ndash;                            IGST &ndash;&gt;-->
+                                    <!--                                            <th style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 5px" class="header_text">Rate</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                            <th style="border: 1px solid">-->
+                                    <!--                                                <strong style=" padding: 5px" class="header_text">Amount</strong>-->
+                                    <!--                                            </th>-->
+                                    <!--                                        </tr>-->
+
+                                    <!--                                        &lt;!&ndash;                        this is for second table HSN code and gst charges &ndash;&gt;-->
+                                    <!--                                        <t t-set="sq_no" t-value="1"/>-->
+                                    <!--                                        <t t-set="total_cgst" t-value="0"/>-->
+                                    <!--                                        <t t-set="total_sgst" t-value="0"/>-->
+                                    <!--                                        <t t-set="total_igst" t-value="0"/>-->
+                                    <!--                                        <t t-set="total_amount_taxable" t-value="0"/>-->
+                                    <!--                                        <t t-set="total_amount" t-value="0"/>-->
+                                    <!--                                        <t t-set="igst" t-value="0"/>-->
+                                    <!--                                        <t t-set="hsn_summary" t-value="doc.cal_hsn_summary()"/>-->
+                                    <!--                                        <t t-foreach="hsn_summary" t-as="line">-->
+                                    <!--                                            <tr>-->
+                                    <!--                                                <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                    <t t-if="line">-->
+                                    <!--                                                        <span t-esc="sq_no" class="content_text"/>-->
+                                    <!--                                                        <t t-set="sq_no" t-value="sq_no+1"/>-->
+                                    <!--                                                    </t>-->
+                                    <!--                                                </td>-->
+                                    <!--                                                <td style="border: 1px solid" class="center_text" colspan="3">-->
+                                    <!--                                                    <span t-esc="line['hsn_code']" class="content_text"/>-->
+                                    <!--                                                </td>-->
+                                    <!--                                                <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['taxable_value']" class="content_text"-->
+                                    <!--                                                          t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                                    <t t-set="total_amount_taxable"-->
+                                    <!--                                                       t-value="total_amount_taxable + line['taxable_value']"/>-->
+                                    <!--                                                </td>-->
+
+                                    <!--                                                &lt;!&ndash;   CGST (%) &ndash;&gt;-->
+                                    <!--                                                <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['cgst_percent']" class="content_text"/>-->
+                                    <!--                                                    <span class="content_text">%</span>-->
+                                    <!--                                                </td>-->
+                                    <!--                                                &lt;!&ndash;   CGST (Amount) &ndash;&gt;-->
+                                    <!--                                                <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['cgst_amt']" class="content_text"-->
+                                    <!--                                                          t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                                    <t t-set="total_cgst" t-value="total_cgst + line['cgst_amt']"/>-->
+                                    <!--                                                </td>-->
+                                    <!--                                                &lt;!&ndash;   SGST (%) &ndash;&gt;-->
+                                    <!--                                                <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['sgst_percent']" class="content_text"/>-->
+                                    <!--                                                    <span class="content_text">%</span>-->
+                                    <!--                                                </td>-->
+                                    <!--                                                &lt;!&ndash;   SGST (Amount) &ndash;&gt;-->
+                                    <!--                                                <td style="border: 1px solid;" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['sgst_amt']" class="content_text"-->
+                                    <!--                                                          t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                                    <t t-set="total_sgst" t-value="total_sgst + line['sgst_amt']"/>-->
+                                    <!--                                                </td>-->
+
+                                    <!--                                                <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['igst_percent']" class="content_text"/>-->
+                                    <!--                                                    <span class="content_text">%</span>-->
+                                    <!--                                                </td>-->
+                                    <!--                                                <td style="border: 1px solid;" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['igst_amt']" class="content_text"-->
+                                    <!--                                                          t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                                    <t t-set="total_igst" t-value="total_igst + line['igst_amt']"/>-->
+                                    <!--                                                </td>-->
+
+                                    <!--                                                <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                    <span t-esc="line['tax_amt']" class="content_text"-->
+                                    <!--                                                          t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                                    <t t-set="total_amount"-->
+                                    <!--                                                       t-value="total_amount + line['tax_amt']"/>-->
+                                    <!--                                                </td>-->
+                                    <!--                                            </tr>-->
+                                    <!--                                        </t>-->
+                                    <!--                                        <tr>-->
+                                    <!--                                            <td colspan="4" style="border: 1px solid" class="text-right">-->
+                                    <!--                                                <strong style=" padding: 5px" class="header_text">Total</strong>-->
+                                    <!--                                            </td>-->
+                                    <!--                                            <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                <span t-esc="total_amount_taxable" class="content_text"-->
+                                    <!--                                                      t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                            </td>-->
+                                    <!--                                            <td style="border: 1px solid"></td>-->
+                                    <!--                                            <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                <span t-esc="total_cgst" class="content_text"-->
+                                    <!--                                                      t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                            </td>-->
+                                    <!--                                            <td style="border: 1px solid"></td>-->
+                                    <!--                                            <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                <span t-esc="total_sgst" class="content_text"-->
+                                    <!--                                                      t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                            </td>-->
+
+                                    <!--                                            &lt;!&ndash;                            igst&ndash;&gt;-->
+                                    <!--                                            <td style="border: 1px solid"></td>-->
+                                    <!--                                            <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                <span t-esc="total_igst" class="content_text"-->
+                                    <!--                                                      t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                            </td>-->
+
+                                    <!--                                            <td style="border: 1px solid" class="center_text">-->
+                                    <!--                                                <span t-esc="total_amount" class="content_text"-->
+                                    <!--                                                      t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                            </td>-->
+                                    <!--                                        </tr>-->
+                                    <!--                                        <tr>-->
+                                    <!--                                            <td style="background-color:white; text-color: black; border : 1 px solid"-->
+                                    <!--                                                class="content_text" colspan="12">-->
+                                    <!--                                                <strong style=" padding: 5px; text-color: black;"-->
+                                    <!--                                                        class="header_text">-->
+                                    <!--                                                    Amount Chargeable (in-->
+                                    <!--                                                    words) :-->
+                                    <!--                                                </strong>-->
+                                    <!--                                                <strong class="content_text"-->
+                                    <!--                                                        style="text-transform: capitalize; text-color: black;"-->
+                                    <!--                                                        t-esc="doc.convert_num_to_text(doc.amount_total,doc.currency_id.currency_unit_label, doc.currency_id.currency_subunit_label)"/>-->
+                                    <!--                                            </td>-->
+                                    <!--                                        </tr>-->
+                                    <!--                                        <tr>-->
+                                    <!--                                            &lt;!&ndash;                                            <td style="background-color:white; text-color: black; border : 1 px solid" class="content_text" colspan="12">&ndash;&gt;-->
+                                    <!--                                            &lt;!&ndash;                                                <strong style=" padding: 5px; text-color: black;" class="header_text">Amount Chargeable (in&ndash;&gt;-->
+                                    <!--                                            &lt;!&ndash;                                                    words) :&ndash;&gt;-->
+                                    <!--                                            &lt;!&ndash;                                                </strong>&ndash;&gt;-->
+                                    <!--                                            &lt;!&ndash;                                                <strong class="content_text" style="text-transform: capitalize; text-color: black;"&ndash;&gt;-->
+                                    <!--                                            &lt;!&ndash;                                                        t-esc="doc.convert_num_to_text(doc.amount_total,doc.currency_id.currency_unit_label, doc.currency_id.currency_subunit_label)"/>&ndash;&gt;-->
+                                    <!--                                            &lt;!&ndash;                                            </td>&ndash;&gt;-->
+                                    <!--                                        </tr>-->
+
+                                    <!--                                    </table>-->
+
+                                </div>
+                                <!--                                <div class="col-3" style="padding: 0px; padding-left:2px">-->
+                                <!--                                    <table style=" width: 100%;;page-break-inside: avoid;">-->
+                                <!--                                        &lt;!&ndash; Tax totals &ndash;&gt;-->
+                                <!--                                        <t t-set="tax_totals" t-value="doc.tax_totals"/>-->
+                                <!--                                        <t t-call="account.document_tax_totals"/>-->
+                                <!--                                        &lt;!&ndash; Payments &ndash;&gt;-->
+                                <!--                                    </table>-->
+                                <!--                                </div>-->
+
+                            </div>
+                            <div class="row" style="background-color: white; text-color:black; margin-top:3px">
+                                <div class="col-12" style="padding: 0px">
+                                    <table style=" width: 100%;;page-break-inside: avoid;">
+                                        <tr>
+                                            <td width="70%"
+                                                style="border:1px solid;border-top: none;vertical-align: text-top; padding:3px; padding-top:1px">
+                                                <strong style="padding: 2px" class="header_text">
+                                                    <u>
+                                                        Terms And Conditions:
+                                                    </u>
+                                                    <br/>
+                                                    <div style="padding: 2px; padding-bottom:0px; line-height:15px"
+                                                         class="content_text">
+                                                        1) Interest will be recovered @24% per annum on overdue
+                                                        unpaid
+                                                        bills. Claim of any nature whatever will lapse unless raised
+                                                        in
+                                                        writing within 3 days from the date of invoice.
+                                                        <br/>
+                                                        2) Goods once sold cannot be returned and / or
+                                                        exchanged.
+                                                        <br/>3) We reserve the right to demand the payment of this
+                                                        bill
+                                                        at any time before the due date.
+                                                        <br/>4) Payment to be made at our office by account payee's
+                                                        cheque.
+                                                        <br/>5) All disputes subject to Mumbai jurisdiction only.
+                                                        <!--                                                        <br/>6) I / We hereby certify that my / our registration-->
+                                                        <!--                                                        certificate under the Maharashtra Value Added tax Act 2002-->
+                                                        <!--                                                        is in-->
+                                                        <!--                                                        force on the date which the sale of goods specified in this-->
+                                                        <!--                                                        tax-->
+                                                        <!--                                                        invoice is made by me / us and the transaction sale covered-->
+                                                        <!--                                                        by-->
+                                                        <!--                                                        the Tax Invoice.had been effected by us and it shall be-->
+                                                        <!--                                                        accounted for in the turnover of sales while filling-->
+                                                        <!--                                                        of return and due tax, if payable on the sale has been paid-->
+                                                        <!--                                                        or-->
+                                                        <!--                                                        shall be paid.-->
+                                                    </div>
+                                                </strong>
+                                            </td>
+                                            <!--                                            <td width="20%"-->
+                                            <!--                                                style="border:1px solid; vertical-align: top; background-color: white; padding:12px;">-->
+
+                                            <!--                                                <strong style="padding: 0px" class="header_text">Bank Details:-->
+                                            <!--                                                </strong>-->
+                                            <!--                                                <br/>-->
+                                            <!--                                                <b style="padding: 0px" class="content_text">Bank Name &amp; Br:</b>-->
+                                            <!--                                                <span class="content_text">ICICI Bank-->
+                                            <!--                                                </span>-->
+                                            <!--                                                <br/>-->
+                                            <!--                                                <b style="padding: 0px" class="content_text">Branch:</b>-->
+                                            <!--                                                <span class="content_text">-->
+                                            <!--                                                    (Mumbai-MIDC Andheri Branch)-->
+                                            <!--                                                </span>-->
+                                            <!--                                                <br/>-->
+                                            <!--                                                <b style="padding: 0px" class="content_text">Account No.:</b>-->
+                                            <!--                                                <span class="content_text">003205009050</span>-->
+                                            <!--                                                <br/>-->
+                                            <!--                                                <b style="padding: 0px" class="content_text">IFSC:</b>-->
+                                            <!--                                                <span class="content_text">ICIC0000544</span>-->
+                                            <!--                                            </td>-->
+                                            <td width="30%"
+                                                style="border:1px solid; vertical-align: top; background-color: white; padding:12px; padding-top:3px    ">
+                                                <div style="vertical-align: top">
+                                                    <b>From
+                                                        <span t-field="doc.company_id.name"/>
+                                                    </b>
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <br/>
+                                                        <br/>
+                                                        <span class="">
+                                                            <b>Authorised
+                                                                Signatory
+                                                            </b>
+                                                        </span>
+                                                    </div>
+                                                    <div style="" class="col-6 text-end">
+                                                        <!--                                                        <span style="font-size:12px; font-weight:bold">E-INVOICE QR-->
+                                                        <!--                                                            CODE-->
+                                                        <!--                                                        </span>-->
+                                                        <!--                                                            <t t-set="amount" t-value="str(doc.amount_total)"/>-->
+                                                        <!--                                                            <img t-att-src="'/report/barcode/QR/'+amount"-->
+                                                        <!--                                                                 style="height:100px; width:100px ; margin-right:12px"-->
+                                                        <!--                                                                 alt="Barcode"/>-->
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <!--    <template id="external_layout_stripped_invoice">-->
+    <!--        <div t-attf-class="header o_company_#{company.id}_layout">-->
+    <!--            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"-->
+    <!--                 style="height: 60px;width: 220px;margin-top: 13px" alt="Logo"/>-->
+    <!--        </div>-->
+    <!--        <div t-attf-class="article o_report_layout_striped o_company_#{company.id}_layout"-->
+    <!--             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"-->
+    <!--             t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+    <!--            <t t-raw="0"/>-->
+    <!--        </div>-->
+    <!--    </template>-->
+    <!--    <template id="css_invoice_report_header">-->
+    <!--        <t t-if="not o" t-set="o" t-value="doc"/>-->
+    <!--        <t t-if="not company">-->
+    <!--            &lt;!&ndash;  Multicompany  &ndash;&gt;-->
+    <!--            <t t-if="company_id">-->
+    <!--                <t t-set="company" t-value="company_id"/>-->
+    <!--            </t>-->
+    <!--            <t t-elif="o and 'company_id' in o">-->
+    <!--                <t t-set="company" t-value="o.company_id.sudo()"/>-->
+    <!--            </t>-->
+    <!--            <t t-else="else">-->
+    <!--                <t t-set="company" t-value="res_company"/>-->
+    <!--            </t>-->
+    <!--        </t>-->
+    <!--        <t t-call="nivriti.external_layout_stripped_invoice">-->
+    <!--            <t t-raw="0"/>-->
+    <!--        </t>-->
+    <!--    </template>-->
+
+</odoo>
