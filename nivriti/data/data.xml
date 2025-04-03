@@ -121,11 +121,11 @@
                             <span style="font-weight:bold;" t-out="(object.default_code)"></span>
                         </t>
                         <br t-if="object.default_code"/>
-                        <t t-if="object.detailed_type">
+                        <t t-if="object.type">
                             Product Type :-
-                            <span style="font-weight:bold;" t-out="(object.detailed_type)"></span>
+                            <span style="font-weight:bold;" t-out="(object.type)"></span>
                         </t>
-                        <br t-if="object.detailed_type"/>
+                        <br t-if="object.type"/>
                         <t t-if="object.l10n_in_hsn_code">
                             HSN Code :-
                             <span style="font-weight:bold;" t-out="(object.l10n_in_hsn_code)"></span>
