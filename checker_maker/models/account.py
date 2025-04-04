@@ -10,6 +10,14 @@ class AccountMoveInherited(models.Model):
     approval_status = fields.Selection(
         [('new', 'New'), ('pending', 'Pending'), ('waiting', 'Waiting'), ('approved', "Approved")
             , ('refused', 'Refused'), ('cancel', 'Cancel'), ('posted', 'Completed')], compute="compute_approval_status")
+    to_check = fields.Boolean(
+        string='To Check',
+        tracking=True,
+        help="If this checkbox is ticked, it means that the user was not sure of all the related "
+             "information at the time of the creation of the move and that the move needs to be "
+             "checked again.",
+        copy=False
+    )
 
     def compute_approval_status(self):
         for rec in self:
@@ -63,8 +71,7 @@ class AccountMoveInherited(models.Model):
         elif self.move_type in ('out_invoice', 'in_invoice', 'out_refund', 'in_refund'):
             if self.journal_id.company_id != self.company_id:
                 raise ValidationError(f'Journal {self.journal_id.name} does not belong to {self.company_id.name}')
-        # if self.company_id.currency_id != self.currency_id and self.manual_currency_rate_active is False:
-        if self.company_id.currency_id != self.currency_id:
+        if self.company_id.currency_id != self.currency_id and self.manual_currency_rate_active is False:
             raise ValidationError(f"Kindly Note Currency has been changed to {self.currency_id.name}. \n"
                                   f"Please click on Apply Manual Exchange and enter the Conversion Rate.")
         for rec in self:
@@ -125,7 +132,7 @@ class AccountMoveInherited(models.Model):
 
     def action_post(self):
         for rec in self:
-            if rec. approver_ids and rec.approver_ids.request_id.request_status != 'approved':
+            if rec.approver_ids and rec.approver_ids.request_id.request_status != 'approved':
                 raise ValidationError("You cannot post the record without the approval")
             elif rec.move_type in ('out_invoice', 'in_invoice', 'out_refund', 'in_refund'):
                 if rec.journal_id.company_id != rec.company_id:
@@ -136,10 +143,17 @@ class AccountMoveInherited(models.Model):
 class AccountPaymentInherit(models.Model):
     _inherit = 'account.payment'
 
-
     approval_status = fields.Selection(
         [('new', 'New'), ('pending', 'Pending'), ('waiting', 'Waiting'), ('approved', "Approved")
-            , ('refused', 'Refused'), ('cancel', 'Cancel'), ('posted', 'Completed')], compute="compute_approval_status")
+            , ('refused', 'Refused'), ('cancel', 'Cancel'), ('posted', 'Completed')])
+    to_check = fields.Boolean(
+        string='To Check',
+        tracking=True,
+        help="If this checkbox is ticked, it means that the user was not sure of all the related "
+             "information at the time of the creation of the move and that the move needs to be "
+             "checked again.",
+        copy=False
+    )
 
     def get_approval_category(self):
         if self.payment_type == 'inbound':
