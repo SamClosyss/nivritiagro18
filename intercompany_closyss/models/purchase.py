@@ -38,8 +38,6 @@ class PurchaseOrderInherit(models.Model):
         res = super()._prepare_invoice()
         """This function is used to transfer the data in accounting bills """
         res = super()._prepare_invoice()
-        value = {'sales_employee_id': self.buyer_employee_id.id, 'prepared_by': self.prepared_by.id}
-        res.update(value)
         company_id = self.env['res.company'].sudo()._find_company_from_partner(self.partner_id.id)
         journal_id = self.get_inter_company_branch_journal(company_id)
         if journal_id:
