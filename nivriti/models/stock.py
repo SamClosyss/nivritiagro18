@@ -78,7 +78,7 @@ class StockLotInherit(models.Model):
     def write(self, vals):
         if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
             raise ValidationError("Please note only certain group of users can only edit batch/Lot no .")
-        return super().create(vals)
+        return super().write(vals)
 
 
 class StockMoveInherit(models.Model):
