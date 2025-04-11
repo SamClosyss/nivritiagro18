@@ -1897,10 +1897,10 @@
                                                 </b>
                                                 <span class="content_text">Nivriti Agro Foods Private Limited
                                                 </span>
-                                                <br/>
+<!--                                                <br/>-->
                                                 <b style="padding: 1px" class="content_text">Account No.:</b>
                                                 <span class="content_text">102251000032</span>
-                                                <br/>
+<!--                                                <br/>-->
                                                 <b style="padding: 1px" class="content_text">Account Type
                                                 </b>
                                                 <span class="content_text">Cash Credit
@@ -1911,13 +1911,13 @@
                                                 </b>
                                                 <span class="content_text">ICICI BANK
                                                 </span>
-                                                <br/>
+<!--                                                <br/>-->
 
                                                 <b style="padding: 1px" class="content_text">Branch:</b>
                                                 <span class="content_text">
                                                     MUMBAI CHANDIVALI
                                                 </span>
-                                                <br/>
+<!--                                                <br/>-->
                                                 <b style="padding: 1px" class="content_text">IFSC:</b>
                                                 <span class="content_text">ICIC0001022</span>
 
@@ -1940,7 +1940,7 @@
                                                     <span t-field="doc.company_id.name"/>
                                                 </b>
                                             </div>
-                                            <div style="margin-top: 100px; padding:2px">
+                                            <div style="margin-top: 50px; padding:2px">
                                                 <!--                                                <div class="col-6">-->
                                                 <!--                                                    <img t-if="doc.state == 'posted'"-->
                                                 <!--                                                         style="height: 100px; width:100px"-->
