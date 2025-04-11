@@ -14,7 +14,7 @@
 
 
     <template id="tax_invoice_report">
-<!--        Credit notes-->
+        <!--        Credit notes-->
         <t t-if="docs.move_type == 'out_refund'">
             <t t-foreach="range(1)" t-as="index">
                 <t t-call="web.html_container">
@@ -425,7 +425,8 @@
                                         <th width="3%" style="border: 1px solid;" class="header_text text-center">
                                             Sr. No
                                         </th>
-                                        <th width="32%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="32%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Product Name
                                         </th>
                                         <!--                                        <th width="10%" style="border: 1px solid;" class="header_text text-center">-->
@@ -437,13 +438,16 @@
                                         <!--                            <td style="border: 1px solid" class="text-center" colspan="2">-->
                                         <!--                                <strong style=" padding: 5px" class="header_text">Product</strong>-->
                                         <!--                            </td>-->
-                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             HSN/SAC
                                         </th>
-                                        <th width="7%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="7%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Qty.
                                         </th>
-                                        <th width="9%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="9%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Unit Price
                                         </th>
                                         <!--                            <td style="border: 1px solid" class="text-center">-->
@@ -452,19 +456,23 @@
                                         <!--                                        <th width="5%" style="border: 1px solid" class="header_text text-center">-->
                                         <!--                                            Unit Price-->
                                         <!--                                        </th>-->
-                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Discount
                                         </th>
-                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Tax
                                         </th>
-                                        <th width="10%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="10%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Amount
                                         </th>
                                         <!--                                        <th width="5%" style="border: 1px solid" class="header_text text-center">-->
                                         <!--                                            Sch. Dis-->
                                         <!--                                        </th>-->
-                                        <th width="15%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="15%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Net
                                         </th>
                                     </tr>
@@ -699,7 +707,8 @@
 
                                 <div class="row" style="background-color: white; text-color:black; margin-top:3px">
                                     <div class="col-8" style="padding: 4px;border:2px solid black">
-                                        <table class="table table-sm mt-2" style="width: 100%" name="invoice_snln_table">
+                                        <table class="table table-sm mt-2" style="width: 100%"
+                                               name="invoice_snln_table">
                                             <thead>
                                                 <tr>
                                                     <th class="header_text text-center" width="60%">
@@ -720,11 +729,12 @@
                                                     </td>
                                                     <td class="content_text">
                                                         <t t-esc="snln_line['quantity']">6.00</t>
-                                                        <t t-esc="snln_line['uom_name']" groups="uom.group_uom">units</t>
+                                                        <t t-esc="snln_line['uom_name']" groups="uom.group_uom">units
+                                                        </t>
                                                     </td>
                                                     <td>
                                                         <t class="text-end content_text" t-esc="snln_line['lot_name']">
-                                                             BC46282798
+                                                            BC46282798
                                                         </t>
                                                     </td>
                                                 </tr>
@@ -914,8 +924,8 @@
                                         </table>
                                     </div>
                                     <div class="col-4" style="padding: 10px;border: 2px solid black; border-left: 0px;">
-                                        <div> </div>
-<!--                                        <div class="col-3" style="padding: 2px; padding-left:2px; margin-top: 55px">-->
+                                        <div></div>
+                                        <!--                                        <div class="col-3" style="padding: 2px; padding-left:2px; margin-top: 55px">-->
                                         <div style="margin-top: 100px">
                                             <table style=" width: 100%;page-break-inside: avoid;margin-top: 55px">
                                                 <!-- Tax totals -->
@@ -985,17 +995,17 @@
                                                 </b>
                                             </div>
                                             <div style="margin-top: 200px; padding:2px">
-<!--                                                <div class="col-6">-->
-<!--                                                    <img t-if="doc.state == 'posted'"-->
-<!--                                                         style="height: 100px; width:100px"-->
-<!--                                                         src="/nivriti/static/bg_sign.jpg" class=""-->
-<!--                                                         alt="Signature"/>-->
-                                                    <p class="">
-                                                        <b>Authorised
-                                                            Signatory
-                                                        </b>
-                                                    </p>
-<!--                                                </div>-->
+                                                <!--                                                <div class="col-6">-->
+                                                <!--                                                    <img t-if="doc.state == 'posted'"-->
+                                                <!--                                                         style="height: 100px; width:100px"-->
+                                                <!--                                                         src="/nivriti/static/bg_sign.jpg" class=""-->
+                                                <!--                                                         alt="Signature"/>-->
+                                                <p class="">
+                                                    <b>Authorised
+                                                        Signatory
+                                                    </b>
+                                                </p>
+                                                <!--                                                </div>-->
                                                 <div style="" class="col-6 text-end">
                                                 </div>
                                             </div>
@@ -1003,14 +1013,14 @@
                                     </div>
                                 </div>
                             </div>
-                    </t>
+                        </t>
                     </t>
                 </t>
 
             </t>
 
         </t>
-<!--        Invoices-->
+        <!--        Invoices-->
         <t t-if="docs.move_type != 'out_refund'">
             <t t-foreach="range(3)" t-as="index">
                 <t t-call="web.html_container">
@@ -1435,7 +1445,8 @@
                                         <th width="3%" style="border: 1px solid;" class="header_text text-center">
                                             Sr. No
                                         </th>
-                                        <th width="32%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="32%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Product Name
                                         </th>
                                         <!--                                        <th width="10%" style="border: 1px solid;" class="header_text text-center">-->
@@ -1447,13 +1458,16 @@
                                         <!--                            <td style="border: 1px solid" class="text-center" colspan="2">-->
                                         <!--                                <strong style=" padding: 5px" class="header_text">Product</strong>-->
                                         <!--                            </td>-->
-                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             HSN/SAC
                                         </th>
-                                        <th width="7%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="7%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Qty.
                                         </th>
-                                        <th width="9%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="9%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Unit Price
                                         </th>
                                         <!--                            <td style="border: 1px solid" class="text-center">-->
@@ -1462,19 +1476,23 @@
                                         <!--                                        <th width="5%" style="border: 1px solid" class="header_text text-center">-->
                                         <!--                                            Unit Price-->
                                         <!--                                        </th>-->
-                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Discount
                                         </th>
-                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Tax
                                         </th>
-                                        <th width="10%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="10%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Amount
                                         </th>
                                         <!--                                        <th width="5%" style="border: 1px solid" class="header_text text-center">-->
                                         <!--                                            Sch. Dis-->
                                         <!--                                        </th>-->
-                                        <th width="15%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
+                                        <th width="15%" style="border: 1px solid;vertical-align: center"
+                                            class="header_text text-center">
                                             Net
                                         </th>
                                     </tr>
@@ -1709,7 +1727,8 @@
 
                                 <div class="row" style="background-color: white; text-color:black; margin-top:3px">
                                     <div class="col-8" style="padding: 4px;border:2px solid black">
-                                        <table class="table table-sm mt-2" style="width: 100%" name="invoice_snln_table">
+                                        <table class="table table-sm mt-2" style="width: 100%"
+                                               name="invoice_snln_table">
                                             <thead>
                                                 <tr>
                                                     <th class="header_text text-center" width="60%">
@@ -1730,11 +1749,12 @@
                                                     </td>
                                                     <td class="content_text">
                                                         <t t-esc="snln_line['quantity']">6.00</t>
-                                                        <t t-esc="snln_line['uom_name']" groups="uom.group_uom">units</t>
+                                                        <t t-esc="snln_line['uom_name']" groups="uom.group_uom">units
+                                                        </t>
                                                     </td>
                                                     <td>
                                                         <t class="text-end content_text" t-esc="snln_line['lot_name']">
-                                                             BC46282798
+                                                            BC46282798
                                                         </t>
                                                     </td>
                                                 </tr>
@@ -1833,7 +1853,8 @@
                                                     </td>
                                                     <!--   CGST (Amount) -->
                                                     <td style="border: 1px solid" class="center_text">
-                                                        <span t-esc="line['taxable_value']*line['cgst_percent']/100" class="content_text"
+                                                        <span t-esc="line['taxable_value']*line['cgst_percent']/100"
+                                                              class="content_text"
                                                               t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                         <t t-set="total_cgst"
                                                            t-value="total_cgst + (line['taxable_value']*line['cgst_percent']/100)"/>
@@ -1845,7 +1866,8 @@
                                                     </td>
                                                     <!--   SGST (Amount) -->
                                                     <td style="border: 1px solid;" class="center_text">
-                                                        <span t-esc="line['taxable_value']*line['sgst_percent']/100" class="content_text"
+                                                        <span t-esc="line['taxable_value']*line['sgst_percent']/100"
+                                                              class="content_text"
                                                               t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                         <t t-set="total_sgst"
                                                            t-value="total_sgst + (line['taxable_value']*line['sgst_percent']/100)"/>
@@ -1858,16 +1880,17 @@
                                                             %
                                                         </span>
                                                     </td>
-<!--                                                    <td style="border: 1px solid;" class="center_text">-->
-<!--                                                        <span t-if="line['igst_percent'] != 0"-->
-<!--                                                              t-esc="line['igst_amt']" class="content_text"-->
-<!--                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>-->
-<!--                                                        <t t-set="total_igst"-->
-<!--                                                           t-value="total_igst + line['igst_amt']"/>-->
-<!--                                                    </td>-->
+                                                    <!--                                                    <td style="border: 1px solid;" class="center_text">-->
+                                                    <!--                                                        <span t-if="line['igst_percent'] != 0"-->
+                                                    <!--                                                              t-esc="line['igst_amt']" class="content_text"-->
+                                                    <!--                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>-->
+                                                    <!--                                                        <t t-set="total_igst"-->
+                                                    <!--                                                           t-value="total_igst + line['igst_amt']"/>-->
+                                                    <!--                                                    </td>-->
                                                     <td style="border: 1px solid;" class="center_text">
                                                         <span t-if="line['igst_percent'] != 0"
-                                                              t-esc="line['taxable_value']*line['igst_percent']/100" class="content_text"
+                                                              t-esc="line['taxable_value']*line['igst_percent']/100"
+                                                              class="content_text"
                                                               t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                         <t t-set="total_igst"
                                                            t-value="total_igst + (line['taxable_value']*line['igst_percent']/100)"/>
@@ -1930,13 +1953,17 @@
                                         </table>
                                     </div>
                                     <div class="col-4" style="padding: 10px;border: 2px solid black; border-left: 0px;">
-                                        <div> </div>
-<!--                                        <div class="col-3" style="padding: 2px; padding-left:2px; margin-top: 55px">-->
+                                        <div></div>
+                                        <!--                                        <div class="col-3" style="padding: 2px; padding-left:2px; margin-top: 55px">-->
                                         <div style="margin-top: 100px">
                                             <table style=" width: 100%;page-break-inside: avoid;margin-top: 55px">
                                                 <!-- Tax totals -->
-                                                <t t-set="tax_totals" t-value="doc.tax_totals"/>
-                                                <t t-call="account.document_tax_totals"/>
+                                                <t t-if="doc.tax_totals" t-call="account.document_tax_totals">
+                                                    <t t-set="tax_totals" t-value="doc.tax_totals"/>
+                                                    <t t-set="currency" t-value="doc.currency_id"/>
+                                                </t>
+                                                <!--                                                <t t-set="tax_totals" t-value="doc.tax_totals"/>-->
+                                                <!--                                                <t t-call="account.document_tax_totals"/>-->
                                                 <!-- Payments -->
                                             </table>
                                         </div>
@@ -2001,17 +2028,17 @@
                                                 </b>
                                             </div>
                                             <div style="margin-top: 200px; padding:2px">
-<!--                                                <div class="col-6">-->
-<!--                                                    <img t-if="doc.state == 'posted'"-->
-<!--                                                         style="height: 100px; width:100px"-->
-<!--                                                         src="/nivriti/static/bg_sign.jpg" class=""-->
-<!--                                                         alt="Signature"/>-->
-                                                    <p class="">
-                                                        <b>Authorised
-                                                            Signatory
-                                                        </b>
-                                                    </p>
-<!--                                                </div>-->
+                                                <!--                                                <div class="col-6">-->
+                                                <!--                                                    <img t-if="doc.state == 'posted'"-->
+                                                <!--                                                         style="height: 100px; width:100px"-->
+                                                <!--                                                         src="/nivriti/static/bg_sign.jpg" class=""-->
+                                                <!--                                                         alt="Signature"/>-->
+                                                <p class="">
+                                                    <b>Authorised
+                                                        Signatory
+                                                    </b>
+                                                </p>
+                                                <!--                                                </div>-->
                                                 <div style="" class="col-6 text-end">
                                                 </div>
                                             </div>
@@ -2019,12 +2046,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </t>
                     </t>
                 </t>
             </t>
         </t>
-    </t>
-</template>
+    </template>
 
 
-        </odoo>
+</odoo>
