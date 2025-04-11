@@ -1054,8 +1054,7 @@
                                 text-align: center;
                                 }
                             </style>
-                            <div class="page"
-                                 style="margin-top:-45px; font-family: Roboto ! important; border 3px solid black  ! important;">
+                            <div class="page" style="margin-top:-45px; font-family: Roboto ! important; border 3px solid black  ! important;">
                                 <!--                        <table style="width:100%; border: 2px solid black">-->
                                 <!--                            <tr>-->
                                 <!--                                <center colspan="3">-->
@@ -1070,7 +1069,7 @@
                                 <!--                        </table>-->
 
                                 <div class="row" style="border: 1px solid black;">
-                                    <div class="col-3" style="border-right: 1px solid black; padding:3px">
+                                    <div class="col-3" style="border-right: 1px solid black; padding:1px;font-size:12px">
                                         <strong class="content_text">Billing From</strong>
                                         <!--                                        <span style="padding: 5px" class="header_text" t-esc="doc.company_id.name"/>-->
                                         <div>
@@ -1078,11 +1077,9 @@
                                                 <span class="" t-if="doc.company_id" t-field="doc.company_id.name"/>
                                             </b>
                                             <br t-if="doc.company_id"/>
-                                            <span class="" t-if="doc.company_id.street"
-                                                  t-field="doc.company_id.street"/>
+                                            <span class="" t-if="doc.company_id.street" t-field="doc.company_id.street"/>
                                             <br t-if="doc.company_id.street"/>
-                                            <span class="" t-if="doc.company_id.street2"
-                                                  t-field="doc.company_id.street2"/>
+                                            <span class="" t-if="doc.company_id.street2" t-field="doc.company_id.street2"/>
                                             <br t-if="doc.company_id.street2"/>
                                             <span class="" t-if="doc.company_id.city" t-field="doc.company_id.city"/>
                                             <span class="" t-if="doc.company_id.zip" t-field="doc.company_id.zip"/>
@@ -1112,18 +1109,16 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-3" style="border-right: 1px solid black; padding:3px">
+                                    <div class="col-3" style="border-right: 1px solid black; padding:1px;font-size:12px">
                                         <strong class="content_text">Billing to</strong>
                                         <div>
                                             <b>
                                                 <span class="" t-if="doc.partner_id" t-field="doc.partner_id.name"/>
                                             </b>
                                             <br t-if="doc.partner_id"/>
-                                            <span class="" t-if="doc.partner_id.street"
-                                                  t-field="doc.partner_id.street"/>
+                                            <span class="" t-if="doc.partner_id.street" t-field="doc.partner_id.street"/>
                                             <br t-if="doc.partner_id.street"/>
-                                            <span class="" t-if="doc.partner_id.street2"
-                                                  t-field="doc.partner_id.street2"/>
+                                            <span class="" t-if="doc.partner_id.street2" t-field="doc.partner_id.street2"/>
                                             <br t-if="doc.partner_id.street2"/>
                                             <span class="" t-if="doc.partner_id.city" t-field="doc.partner_id.city"/>
                                             <span class="" t-if="doc.partner_id.zip" t-field="doc.partner_id.zip"/>
@@ -1153,10 +1148,9 @@
                                             <span t-if="doc.partner_id.fssai_no" t-field="doc.partner_id.fssai_no"/>
                                         </div>
                                     </div>
-                                    <div class="col-3" style="border-right: 1px solid black; padding:3px">
+                                    <div class="col-3" style="border-right: 1px solid black; padding:1px;font-size:12px">
                                         <strong class="content_text">Shipped from</strong>
-                                        <t t-set="shipped_from"
-                                           t-value="doc.invoice_line_ids[0].sale_line_ids.warehouse_id.partner_id"/>
+                                        <t t-set="shipped_from" t-value="doc.invoice_line_ids[0].sale_line_ids.warehouse_id.partner_id"/>
                                         <div t-if="shipped_from">
                                             <b>
                                                 <t t-if="shipped_from.parent_id.name">
@@ -1194,7 +1188,7 @@
                                             <span t-if="shipped_from.vat" t-field="shipped_from.vat"/>
                                         </div>
                                     </div>
-                                    <div class="col-3" style="padding:3px">
+                                    <div class="col-3" style="padding:1px;font-size:12px">
                                         <strong class="content_text">Shipped to</strong>
                                         <div t-if="doc.partner_shipping_id">
                                             <!--                                            <t t-set="shipped_to" t-value="doc.picking_ids[0].partner_id.name +', '+doc.partner_id.name"/>-->
@@ -1207,46 +1201,38 @@
                                                 </t>
                                             </b>
                                             <br t-if="doc.partner_id"/>
-                                            <span class="" t-if="doc.partner_shipping_id.street"
-                                                  t-field="doc.partner_shipping_id.street"/>
+                                            <span class="" t-if="doc.partner_shipping_id.street" t-field="doc.partner_shipping_id.street"/>
                                             <br t-if="doc.partner_shipping_id.street"/>
-                                            <span class="" t-if="doc.partner_shipping_id.street2"
-                                                  t-field="doc.partner_shipping_id.street2"/>
+                                            <span class="" t-if="doc.partner_shipping_id.street2" t-field="doc.partner_shipping_id.street2"/>
                                             <br t-if="doc.partner_shipping_id.street2"/>
-                                            <span class="" t-if="doc.partner_shipping_id.city"
-                                                  t-field="doc.partner_shipping_id.city"/>
-                                            <span class="" t-if="doc.partner_shipping_id.zip"
-                                                  t-field="doc.partner_shipping_id.zip"/>
+                                            <span class="" t-if="doc.partner_shipping_id.city" t-field="doc.partner_shipping_id.city"/>
+                                            <span class="" t-if="doc.partner_shipping_id.zip" t-field="doc.partner_shipping_id.zip"/>
                                             <br t-if="doc.partner_shipping_id.zip"/>
                                             <span t-if="doc.company_id.state_id">State Code :</span>
-                                            <span t-if="doc.partner_shipping_id.state_id"
-                                                  t-field="doc.partner_shipping_id.state_id"/>
+                                            <span t-if="doc.partner_shipping_id.state_id" t-field="doc.partner_shipping_id.state_id"/>
                                             <br t-if="doc.partner_shipping_id.state_id"/>
                                             <span t-if="doc.partner_shipping_id.mobile">
                                                 <i class="oi oi-voip" style="font-size:15px"/>
                                             </span>
-                                            <span t-if="doc.partner_shipping_id.mobile"
-                                                  t-field="doc.partner_shipping_id.mobile"/>
+                                            <span t-if="doc.partner_shipping_id.mobile" t-field="doc.partner_shipping_id.mobile"/>
                                             <br t-if="doc.partner_shipping_id.mobile"/>
 
                                             <span t-if="doc.partner_shipping_id.email">
                                                 <i class="fa fa-envelope" style="font-size:15px"/>
                                             </span>
-                                            <span t-if="doc.partner_shipping_id.email"
-                                                  t-field="doc.partner_shipping_id.email"/>
+                                            <span t-if="doc.partner_shipping_id.email" t-field="doc.partner_shipping_id.email"/>
                                             <br t-if="doc.partner_shipping_id.email"/>
 
                                             <span t-if="doc.partner_shipping_id.vat">GSTIN:
                                             </span>
-                                            <span t-if="doc.partner_shipping_id.vat"
-                                                  t-field="doc.partner_shipping_id.vat"/>
+                                            <span t-if="doc.partner_shipping_id.vat" t-field="doc.partner_shipping_id.vat"/>
 
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row" style="border: 1px solid black;">
-                                    <div class="col-3" style="border-right: 1px solid black; padding:3px">
+                                    <div class="col-3" style="border-right: 1px solid black; padding:2px;font-size:12px;">
                                         <div class="row">
                                             <div class="col-12">
                                                 <t t-if="doc.move_type == 'out_refund'">
@@ -1269,8 +1255,7 @@
                                                     <strong style="padding: 0px" class="header_text">Invoice Date:
                                                     </strong>
                                                 </t>
-                                                <span t-esc="doc.invoice_date" t-options="{'widget': 'date'}"
-                                                      class="content_text" style="padding: 5px"/>
+                                                <span t-esc="doc.invoice_date" t-options="{'widget': 'date'}" class="content_text" style="padding: 5px"/>
                                                 <br/>
 
 
@@ -1295,13 +1280,12 @@
                                                         Date:
                                                     </strong>
                                                 </t>
-                                                <span t-esc="doc.invoice_date_due" class="content_text"
-                                                      style="padding: 5px"/>
+                                                <span t-esc="doc.invoice_date_due" class="content_text" style="padding: 5px"/>
                                             </div>
 
                                         </div>
                                     </div>
-                                    <div class="col-3" style="border-right: 1px solid black; padding:3px">
+                                    <div class="col-3" style="border-right: 1px solid black; padding:2px;font-size:12px">
                                         <div class="row">
                                             <div class="col-12">
                                                 <t>
@@ -1316,8 +1300,7 @@
                                                     </strong>
                                                 </t>
                                                 <!--                                    <br/>-->
-                                                <span t-esc="doc.delivery_date" t-options="{'widget': 'date'}"
-                                                      class="content_text" style="padding: 0px"/>
+                                                <span t-esc="doc.delivery_date" t-options="{'widget': 'date'}" class="content_text" style="padding: 0px"/>
                                                 <br t-if="doc.l10n_in_vehicle_no"/>
 
 
@@ -1325,12 +1308,10 @@
                                                     <strong style="padding: 0px" class="header_text">Vehicle No:
                                                     </strong>
                                                 </t>
-                                                <span t-esc="doc.l10n_in_vehicle_no" class="content_text"
-                                                      style="padding: 5px"/>
+                                                <span t-esc="doc.l10n_in_vehicle_no" class="content_text" style="padding: 5px"/>
                                             </div>
                                         </div>
-                                        <t t-set="l10n_in_einvoice_json"
-                                           t-value="doc._get_l10n_in_edi_response_json()"/>
+                                        <t t-set="l10n_in_einvoice_json" t-value="doc._get_l10n_in_edi_response_json()"/>
                                         <div class="row">
 
 
@@ -1339,11 +1320,8 @@
                                                     <strong style="padding: 0px" class="header_text">E-Way Bill No:
                                                     </strong>
                                                 </t>
-                                                <t t-set="l10n_in_ewaybill_json"
-                                                   t-value="doc._get_l10n_in_edi_ewaybill_response_json()"/>
-                                                <span class="content_text" style="padding: 0px"
-                                                      t-if="'EwbNo' in l10n_in_ewaybill_json"
-                                                      t-out="l10n_in_ewaybill_json['EwbNo']"/>
+                                                <t t-set="l10n_in_ewaybill_json" t-value="doc._get_l10n_in_edi_ewaybill_response_json()"/>
+                                                <span class="content_text" style="padding: 0px" t-if="'EwbNo' in l10n_in_ewaybill_json" t-out="l10n_in_ewaybill_json['EwbNo']"/>
                                                 <span t-value="" class="content_text" style="padding: 5px"/>
                                                 <br/>
 
@@ -1352,18 +1330,14 @@
                                                         Date:
                                                     </strong>
                                                 </t>
-                                                <t t-set="l10n_in_ewaybill_json"
-                                                   t-value="doc._get_l10n_in_edi_ewaybill_response_json()"/>
-                                                <span t-options="{'widget': 'date'}" class="content_text"
-                                                      style="padding: 5px" t-if="'EwbDt' in l10n_in_ewaybill_json"
-                                                      t-out="l10n_in_ewaybill_json['EwbDt']"/>
+                                                <t t-set="l10n_in_ewaybill_json" t-value="doc._get_l10n_in_edi_ewaybill_response_json()"/>
+                                                <span t-options="{'widget': 'date'}" class="content_text" style="padding: 5px" t-if="'EwbDt' in l10n_in_ewaybill_json" t-out="l10n_in_ewaybill_json['EwbDt']"/>
                                                 <br/>
                                                 <t t-if="doc.broker_id">
                                                     <strong style="padding: 0px" class="header_text">
                                                         Broker:
                                                     </strong>
-                                                    <span t-esc="doc.broker_id.name" class="content_text"
-                                                          style="padding: 5px"/>
+                                                    <span t-esc="doc.broker_id.name" class="content_text" style="padding: 5px"/>
                                                 </t>
                                                 <br t-if="doc.l10n_in_transporter_id"/>
                                                 <t t-if="doc.l10n_in_transporter_id">
@@ -1371,8 +1345,7 @@
                                                     </strong>
                                                 </t>
 
-                                                <span t-esc="doc.l10n_in_transporter_id.name" class="content_text"
-                                                      style="padding: 0px"/>
+                                                <span t-esc="doc.l10n_in_transporter_id.name" class="content_text" style="padding: 0px"/>
 
                                                 <br t-if="doc.l10n_in_transporter_id"/>
                                                 <t t-if="doc.l10n_in_transporter_id.vat">
@@ -1380,21 +1353,19 @@
                                                     </strong>
                                                 </t>
 
-                                                <span t-esc="doc.l10n_in_transporter_id.vat" class="content_text"
-                                                      style="padding: 0px"/>
+                                                <span t-esc="doc.l10n_in_transporter_id.vat" class="content_text" style="padding: 0px"/>
 
 
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div class="col-3" style="border-right: 1px solid black; padding:3px">
+                                    <div class="col-3" style="border-right: 1px solid black; padding:2px;font-size:12px">
                                         <div class="row">
                                             <div class="col-12">
                                                 <strong style="padding: 0px" class="header_text">ACK. NO:
                                                 </strong>
-                                                <span class="content_text" t-if="l10n_in_einvoice_json"
-                                                      style="padding: 5px" t-out="l10n_in_einvoice_json['AckNo']"/>
+                                                <span class="content_text" t-if="l10n_in_einvoice_json" style="padding: 5px" t-out="l10n_in_einvoice_json['AckNo']"/>
 
                                             </div>
                                         </div>
@@ -1404,10 +1375,7 @@
                                                     <strong style="padding: 0px" class="header_text">ACK. Date:
                                                     </strong>
                                                 </t>
-                                                <span class="content_text" style="padding: 0px"
-                                                      t-if="l10n_in_einvoice_json"
-                                                      t-out="l10n_in_einvoice_json['AckDt']"
-                                                      t-options="{'widget': 'date'}"/>
+                                                <span class="content_text" style="padding: 0px" t-if="l10n_in_einvoice_json" t-out="l10n_in_einvoice_json['AckDt']" t-options="{'widget': 'date'}"/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -1416,37 +1384,32 @@
                                             </div>
 
                                             <div class="col-8">
-                                                <span class="content_text irn" style="padding: 0px;"
-                                                      t-if="l10n_in_einvoice_json"
-                                                      t-out="l10n_in_einvoice_json['Irn']"/>
+                                                <span class="content_text irn" style="padding: 0px;" t-if="l10n_in_einvoice_json" t-out="l10n_in_einvoice_json['Irn']"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3" style="padding:3px">
+                                    <div class="col-3" style="padding:2px;font-size:12px">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="col-12" style="text-align:center">
                                                     <strong style="" class="header_text">E-INVOICE QR
                                                         CODE
                                                     </strong>
-                                                    <img t-if="l10n_in_einvoice_json"
-                                                         t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', l10n_in_einvoice_json['SignedQRCode'], 500, 500)"
-                                                         style="max-height: 130px"/>
+                                                    <img t-if="l10n_in_einvoice_json" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', l10n_in_einvoice_json['SignedQRCode'], 500, 500)" style="max-height: 130px"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <t t-set="lot_values" t-value="doc._get_invoiced_lot_values()"/>
-                                <div t-if="not lot_values" class="oe_structure">&#8203;</div>
-                                <br/>
+                                <div t-if="not lot_values" class="oe_structure">​</div>
+                                <!--<br/>-->
                                 <table style="border-collapse: collapse; width: 100%" class="avoid-page-break-inside">
                                     <tr>
                                         <th width="3%" style="border: 1px solid;" class="header_text text-center">
                                             Sr. No
                                         </th>
-                                        <th width="32%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="32%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             Product Name
                                         </th>
                                         <!--                                        <th width="10%" style="border: 1px solid;" class="header_text text-center">-->
@@ -1458,16 +1421,13 @@
                                         <!--                            <td style="border: 1px solid" class="text-center" colspan="2">-->
                                         <!--                                <strong style=" padding: 5px" class="header_text">Product</strong>-->
                                         <!--                            </td>-->
-                                        <th width="8%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             HSN/SAC
                                         </th>
-                                        <th width="7%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="7%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             Qty.
                                         </th>
-                                        <th width="9%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="9%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             Unit Price
                                         </th>
                                         <!--                            <td style="border: 1px solid" class="text-center">-->
@@ -1476,23 +1436,19 @@
                                         <!--                                        <th width="5%" style="border: 1px solid" class="header_text text-center">-->
                                         <!--                                            Unit Price-->
                                         <!--                                        </th>-->
-                                        <th width="8%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             Discount
                                         </th>
-                                        <th width="8%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="8%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             Tax
                                         </th>
-                                        <th width="10%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="10%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             Amount
                                         </th>
                                         <!--                                        <th width="5%" style="border: 1px solid" class="header_text text-center">-->
                                         <!--                                            Sch. Dis-->
                                         <!--                                        </th>-->
-                                        <th width="15%" style="border: 1px solid;vertical-align: center"
-                                            class="header_text text-center">
+                                        <th width="15%" style="border: 1px solid;vertical-align: center" class="header_text text-center">
                                             Net
                                         </th>
                                     </tr>
@@ -1511,8 +1467,7 @@
                                                     </t>
                                                 </center>
                                             </td>
-                                            <td style="border: 1px solid; padding-left:2px; padding-right:2px;"
-                                                class="text-start">
+                                            <td style="border: 1px solid; padding-left:2px; padding-right:2px;" class="text-start">
                                                 <span t-esc="line.product_id.name" class="content_text"/>
                                             </td>
                                             <!--                                            <td style="border: 1px solid ;padding-left:2px; padding-right:2px; " class="text-start">-->
@@ -1526,8 +1481,7 @@
                                             <!--                                            </td>-->
                                             <td style="border: 1px solid" class="text-center">
                                                 <center>
-                                                    <span t-esc="line.product_id.l10n_in_hsn_code"
-                                                          class="content_text"/>
+                                                    <span t-esc="line.product_id.l10n_in_hsn_code" class="content_text"/>
                                                 </center>
                                             </td>
                                             <td style="border: 1px solid" class="text-center">
@@ -1553,11 +1507,8 @@
 
                                                 </center>
                                             </td>
-                                            <td style="vertical-align: top;border: 1px solid" name="td_gst"
-                                                class="text-center">
-                                                <span class="content_text"
-                                                      t-esc="', '.join(map(lambda x: (x.name), line.tax_ids))"
-                                                      id="line_tax_ids"/>
+                                            <td style="vertical-align: top;border: 1px solid" name="td_gst" class="text-center">
+                                                <span class="content_text" t-esc="', '.join(map(lambda x: (x.name), line.tax_ids))" id="line_tax_ids"/>
                                                 <!--                                        <t t-if="line.tax_ids">-->
                                                 <!--                                            <t t-foreach="line.tax_ids" t-as="t">-->
                                                 <!--                                                <t t-if="t.children_tax_ids">-->
@@ -1590,15 +1541,13 @@
                                                         <t t-foreach="t.children_tax_ids" t-as="l">
                                                             <t t-if="'CGST' == l.name[:4]">
                                                                 <span style="vertical-align:center; font-size:13px">
-                                                                    <t t-set="subtotal"
-                                                                       t-value="((l.amount * line.price_subtotal)/100)"/>
+                                                                    <t t-set="subtotal" t-value="((l.amount * line.price_subtotal)/100)"/>
                                                                     <t t-set="cgst" t-value="cgst + subtotal"/>
                                                                 </span>
                                                             </t>
                                                             <t t-if="'SGST' == l.name[:4]">
                                                                 <span style="vertical-align:center; font-size:13px">
-                                                                    <t t-set="subtotal"
-                                                                       t-value="((l.amount * line.price_subtotal)/100)"/>
+                                                                    <t t-set="subtotal" t-value="((l.amount * line.price_subtotal)/100)"/>
                                                                     <t t-set="sgst" t-value="sgst + subtotal"/>
                                                                 </span>
                                                             </t>
@@ -1610,8 +1559,7 @@
                                                     <t t-foreach="line.tax_ids" t-as="t">
                                                         <t t-if="'IGST' == t.name[:4]">
                                                             <span style="vertical-align:center; font-size:13px">
-                                                                <t t-set="subtotal_igst"
-                                                                   t-value="((t.amount * line.price_subtotal)/100)"/>
+                                                                <t t-set="subtotal_igst" t-value="((t.amount * line.price_subtotal)/100)"/>
                                                                 <t t-set="igst" t-value="igst + subtotal_igst"/>
                                                             </span>
                                                         </t>
@@ -1621,9 +1569,7 @@
                                                     <!--                                            <span t-esc="gst_inc_price"-->
                                                     <!--                                                  t-options='{"widget": "float", "precision": 2}'-->
                                                     <!--                                                  class="content_text"/>-->
-                                                    <span t-esc="line.price_subtotal"
-                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"
-                                                          class="content_text"/>
+                                                    <span t-esc="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}" class="content_text"/>
                                                 </center>
                                             </td>
 
@@ -1633,8 +1579,7 @@
                                             <!--                                                </center>-->
                                             <!--                                            </td>-->
 
-                                            <td style="border: 1px solid; padding-left:2px; padding-right:2px;"
-                                                class="text-end">
+                                            <td style="border: 1px solid; padding-left:2px; padding-right:2px;" class="text-end">
                                                 <t t-set="cgst" t-value="0"/>
                                                 <t t-set="sgst" t-value="0"/>
                                                 <t t-set="igst" t-value="0"/>
@@ -1642,15 +1587,13 @@
                                                     <t t-foreach="t.children_tax_ids" t-as="l">
                                                         <t t-if="'CGST' == l.name[:4]">
                                                             <span style="vertical-align:center; font-size:13px">
-                                                                <t t-set="subtotal"
-                                                                   t-value="((l.amount * line.price_subtotal)/100)"/>
+                                                                <t t-set="subtotal" t-value="((l.amount * line.price_subtotal)/100)"/>
                                                                 <t t-set="cgst" t-value="cgst + subtotal"/>
                                                             </span>
                                                         </t>
                                                         <t t-if="'SGST' == l.name[:4]">
                                                             <span style="vertical-align:center; font-size:13px">
-                                                                <t t-set="subtotal"
-                                                                   t-value="((l.amount * line.price_subtotal)/100)"/>
+                                                                <t t-set="subtotal" t-value="((l.amount * line.price_subtotal)/100)"/>
                                                                 <t t-set="sgst" t-value="sgst + subtotal"/>
                                                             </span>
                                                         </t>
@@ -1659,8 +1602,7 @@
                                                 <t t-foreach="line.tax_ids" t-as="t">
                                                     <t t-if="'IGST' == t.name[:4]">
                                                         <span style="vertical-align:center; font-size:13px">
-                                                            <t t-set="subtotal_igst"
-                                                               t-value="((t.amount * line.price_subtotal)/100)"/>
+                                                            <t t-set="subtotal_igst" t-value="((t.amount * line.price_subtotal)/100)"/>
                                                             <t t-set="igst" t-value="igst + subtotal_igst"/>
                                                         </span>
                                                     </t>
@@ -1669,10 +1611,8 @@
                                                 <t t-set="gst_inc_price" t-value="cgst + sgst + igst"/>
                                                 <!--                                            <span t-esc="(gst_inc_price + line.price_subtotal)" class="content_text"-->
                                                 <!--                                                  t-options='{"widget": "float", "precision": 2}'/>-->
-                                                <span t-esc="line.price_total" class="content_text"
-                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
-                                                <t t-set="total"
-                                                   t-value="total + (gst_inc_price + line.price_subtotal)"/>
+                                                <span t-esc="line.price_total" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                <t t-set="total" t-value="total + (gst_inc_price + line.price_subtotal)"/>
                                             </td>
                                         </tr>
                                         <!--                                For Notes and Section-->
@@ -1717,8 +1657,7 @@
 
                                         <!--                                        </td>-->
 
-                                        <td style="border: 1px solid; padding-left:2px; padding-right:2px;"
-                                            class="text-end">
+                                        <td style="border: 1px solid; padding-left:2px; padding-right:2px;" class="text-end">
                                         </td>
                                     </tr>
 
@@ -1727,8 +1666,7 @@
 
                                 <div class="row" style="background-color: white; text-color:black; margin-top:3px">
                                     <div class="col-8" style="padding: 4px;border:2px solid black">
-                                        <table class="table table-sm mt-2" style="width: 100%"
-                                               name="invoice_snln_table">
+                                        <table class="table table-sm mt-2 " style="width: 100%" name="invoice_snln_table">
                                             <thead>
                                                 <tr>
                                                     <th class="header_text text-center" width="60%">
@@ -1758,7 +1696,7 @@
                                                         </t>
                                                     </td>
                                                 </tr>
-                                                <tr></tr>
+                                                <tr/>
                                             </tbody>
                                         </table>
                                         <table style="width: 100%; border-collapse: collapse; page-break-inside: avoid;">
@@ -1840,10 +1778,8 @@
                                                         <span t-esc="line['hsn_code']" class="content_text"/>
                                                     </td>
                                                     <td style="border: 1px solid" class="center_text">
-                                                        <span t-esc="line['taxable_value']" class="content_text"
-                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
-                                                        <t t-set="total_amount_taxable"
-                                                           t-value="total_amount_taxable + line['taxable_value']"/>
+                                                        <span t-esc="line['taxable_value']" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                        <t t-set="total_amount_taxable" t-value="total_amount_taxable + line['taxable_value']"/>
                                                     </td>
 
                                                     <!--   CGST (%) -->
@@ -1853,11 +1789,8 @@
                                                     </td>
                                                     <!--   CGST (Amount) -->
                                                     <td style="border: 1px solid" class="center_text">
-                                                        <span t-esc="line['taxable_value']*line['cgst_percent']/100"
-                                                              class="content_text"
-                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
-                                                        <t t-set="total_cgst"
-                                                           t-value="total_cgst + (line['taxable_value']*line['cgst_percent']/100)"/>
+                                                        <span t-esc="line['taxable_value']*line['cgst_percent']/100" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                        <t t-set="total_cgst" t-value="total_cgst + (line['taxable_value']*line['cgst_percent']/100)"/>
                                                     </td>
                                                     <!--   SGST (%) -->
                                                     <td style="border: 1px solid" class="center_text">
@@ -1866,16 +1799,12 @@
                                                     </td>
                                                     <!--   SGST (Amount) -->
                                                     <td style="border: 1px solid;" class="center_text">
-                                                        <span t-esc="line['taxable_value']*line['sgst_percent']/100"
-                                                              class="content_text"
-                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
-                                                        <t t-set="total_sgst"
-                                                           t-value="total_sgst + (line['taxable_value']*line['sgst_percent']/100)"/>
+                                                        <span t-esc="line['taxable_value']*line['sgst_percent']/100" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                        <t t-set="total_sgst" t-value="total_sgst + (line['taxable_value']*line['sgst_percent']/100)"/>
                                                     </td>
 
                                                     <td style="border: 1px solid" class="center_text">
-                                                        <span t-if="line['igst_percent'] != 0"
-                                                              t-esc="line['igst_percent']" class="content_text"/>
+                                                        <span t-if="line['igst_percent'] != 0" t-esc="line['igst_percent']" class="content_text"/>
                                                         <span t-if="line['igst_percent'] != 0" class="content_text">
                                                             %
                                                         </span>
@@ -1888,18 +1817,12 @@
                                                     <!--                                                           t-value="total_igst + line['igst_amt']"/>-->
                                                     <!--                                                    </td>-->
                                                     <td style="border: 1px solid;" class="center_text">
-                                                        <span t-if="line['igst_percent'] != 0"
-                                                              t-esc="line['taxable_value']*line['igst_percent']/100"
-                                                              class="content_text"
-                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
-                                                        <t t-set="total_igst"
-                                                           t-value="total_igst + (line['taxable_value']*line['igst_percent']/100)"/>
+                                                        <span t-if="line['igst_percent'] != 0" t-esc="line['taxable_value']*line['igst_percent']/100" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                        <t t-set="total_igst" t-value="total_igst + (line['taxable_value']*line['igst_percent']/100)"/>
                                                     </td>
                                                     <td style="border: 1px solid" class="center_text">
-                                                        <span t-esc="line['tax_amt']" class="content_text"
-                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
-                                                        <t t-set="total_amount"
-                                                           t-value="total_amount + line['tax_amt']"/>
+                                                        <span t-esc="line['tax_amt']" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                        <t t-set="total_amount" t-value="total_amount + line['tax_amt']"/>
                                                     </td>
                                                 </tr>
                                             </t>
@@ -1908,44 +1831,34 @@
                                                     <strong style=" padding: 5px" class="header_text">Total</strong>
                                                 </td>
                                                 <td style="border: 1px solid" class="center_text">
-                                                    <span t-esc="total_amount_taxable" class="content_text"
-                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                    <span t-esc="total_amount_taxable" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                 </td>
                                                 <td style="border: 1px solid"/>
                                                 <td style="border: 1px solid" class="center_text">
-                                                    <span t-esc="total_cgst" class="content_text"
-                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                    <span t-esc="total_cgst" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                 </td>
                                                 <td style="border: 1px solid"/>
                                                 <td style="border: 1px solid" class="center_text">
-                                                    <span t-esc="total_sgst" class="content_text"
-                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                    <span t-esc="total_sgst" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                 </td>
 
                                                 <!--                            igst-->
                                                 <td style="border: 1px solid"/>
                                                 <td style="border: 1px solid" class="center_text">
-                                                    <span t-if="total_igst != 0" t-esc="total_igst"
-                                                          class="content_text"
-                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                    <span t-if="total_igst != 0" t-esc="total_igst" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                 </td>
 
                                                 <td style="border: 1px solid" class="center_text">
-                                                    <span t-esc="total_amount" class="content_text"
-                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                    <span t-esc="total_amount" class="content_text" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="background-color:white; text-color: black; border : 1 px solid"
-                                                    class="content_text" colspan="12">
-                                                    <strong style=" padding: 5px; text-color: black;"
-                                                            class="header_text">
+                                                <td style="background-color:white; text-color: black; border : 1 px solid" class="content_text" colspan="12">
+                                                    <strong style=" padding: 5px; text-color: black;" class="header_text">
                                                         Amount Chargeable (in
                                                         words) :
                                                     </strong>
-                                                    <strong class="content_text"
-                                                            style="text-transform: capitalize; text-color: black;"
-                                                            t-esc="doc.convert_num_to_text(doc.amount_total,doc.currency_id.currency_unit_label, doc.currency_id.currency_subunit_label)"/>
+                                                    <strong class="content_text" style="text-transform: capitalize; text-color: black;" t-esc="doc.convert_num_to_text(doc.amount_total,doc.currency_id.currency_unit_label, doc.currency_id.currency_subunit_label)"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1953,7 +1866,7 @@
                                         </table>
                                     </div>
                                     <div class="col-4" style="padding: 10px;border: 2px solid black; border-left: 0px;">
-                                        <div></div>
+                                        <div/>
                                         <!--                                        <div class="col-3" style="padding: 2px; padding-left:2px; margin-top: 55px">-->
                                         <div style="margin-top: 100px">
                                             <table style=" width: 100%;page-break-inside: avoid;margin-top: 55px">
@@ -1976,46 +1889,46 @@
                                     </div>
                                     <div class="row" style="background-color: white; margin-top:3px">
                                         <div class="col-8" style="padding: 0px;">
-                                            <div style="border: 2px solid black; padding: 2px">
+                                            <div style="border: 2px solid black;">
                                                 <strong style="padding: 2px" class="header_text">Bank Details:
                                                 </strong>
                                                 <br/>
-                                                <b style="padding: 2px" class="content_text">Account Name :
+                                                <b style="padding: 1px" class="content_text">Account Name :
                                                 </b>
                                                 <span class="content_text">Nivriti Agro Foods Private Limited
                                                 </span>
                                                 <br/>
-                                                <b style="padding: 2px" class="content_text">Account No.:</b>
+                                                <b style="padding: 1px" class="content_text">Account No.:</b>
                                                 <span class="content_text">102251000032</span>
                                                 <br/>
-                                                <b style="padding: 2px" class="content_text">Account Type
+                                                <b style="padding: 1px" class="content_text">Account Type
                                                 </b>
                                                 <span class="content_text">Cash Credit
                                                 </span>
                                                 <br/>
-                                                <b style="padding: 2px" class="content_text">Bank Name &amp;
+                                                <b style="padding: 1px" class="content_text">Bank Name &amp;
                                                     Br:
                                                 </b>
                                                 <span class="content_text">ICICI BANK
                                                 </span>
                                                 <br/>
 
-                                                <b style="padding: 2px" class="content_text">Branch:</b>
+                                                <b style="padding: 1px" class="content_text">Branch:</b>
                                                 <span class="content_text">
                                                     MUMBAI CHANDIVALI
                                                 </span>
                                                 <br/>
-                                                <b style="padding: 2px" class="content_text">IFSC:</b>
+                                                <b style="padding: 1px" class="content_text">IFSC:</b>
                                                 <span class="content_text">ICIC0001022</span>
 
                                             </div>
-                                            <div style="padding: 2px; border: 2px solid black; border-top: 0px">
+                                            <div style="padding: 1px; border: 2px solid black; border-top: 0px">
                                                 <strong style="padding: 2px" class="header_text">
                                                     <u>
                                                         Terms And Conditions:
                                                     </u>
                                                     <br/>
-                                                    <div style="padding: 2px">
+                                                    <div style="padding: 1px">
                                                         <span t-esc="doc.narration"/>
                                                     </div>
                                                 </strong>
@@ -2027,7 +1940,7 @@
                                                     <span t-field="doc.company_id.name"/>
                                                 </b>
                                             </div>
-                                            <div style="margin-top: 200px; padding:2px">
+                                            <div style="margin-top: 100px; padding:2px">
                                                 <!--                                                <div class="col-6">-->
                                                 <!--                                                    <img t-if="doc.state == 'posted'"-->
                                                 <!--                                                         style="height: 100px; width:100px"-->
