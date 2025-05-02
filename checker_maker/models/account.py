@@ -39,9 +39,9 @@ class AccountMoveInherited(models.Model):
                 elif record.move_type in ('in_invoice', 'in_refund'):
                     record.hide_post_button = record.company_id.bills_approval
                 elif record.move_type == 'entry':
-                    if record.payment_id and record.payment_id.payment_type == 'inbound':
+                    if record.origin_payment_id and record.origin_payment_id.payment_type == 'inbound':
                         record.hide_post_button = record.company_id.receipt_approval
-                    elif record.payment_id and record.payment_id.payment_type == 'outbound':
+                    elif record.origin_payment_id and record.origin_payment_id.payment_type == 'outbound':
                         record.hide_post_button = record.company_id.payment_approval
                     else:
                         record.hide_post_button = record.company_id.journal_entry_approval
