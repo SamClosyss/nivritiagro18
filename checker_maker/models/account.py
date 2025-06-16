@@ -182,7 +182,7 @@ class AccountPaymentInherit(models.Model):
                     'partner_id': rec.partner_id.id,
                     'amount': rec.amount,
                     'date': rec.date,
-                    'reference': rec.ref}
+                    'reference': rec.memo}
             if rec.payment_type == 'inbound':
                 data.update({
                    'name': 'Customer Receipt Approval',
