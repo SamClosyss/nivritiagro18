@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="crm_case_kanban_view_leads_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.lead.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-name='card']//field[@name='partner_id']" position="before">
+                <field name="description" options="{'truncate': True}" class="text-muted small"/>
+            </xpath>
+            <xpath expr="//t[@t-name='card']//field[@name='description']" position="after">
+                <field name="contact_name" class="fw-bold small text-muted"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
+        <field name="name">quick_create_opportunity_form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="contact_name" placeholder="Contact Name"/>
+            </xpath>
+            <xpath expr="//field[@name='contact_name']" position="after">
+                <field name="description"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
