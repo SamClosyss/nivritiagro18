@@ -14,6 +14,7 @@
         'pdf/purchase_report_with_logo.xml',
         'pdf/header_footer.xml',
         'views/product_partner.xml',
+        'views/crm_view.xml',
         'wizard/delivery_email.xml',
         # 'wizard/sale_line.xml',
         'data/data.xml',
