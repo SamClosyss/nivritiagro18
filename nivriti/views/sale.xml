@@ -51,9 +51,11 @@
         <field name="inherit_id" ref="sale.view_order_line_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='price_subtotal']" position="after">
-                <field name="delivery_status"/>
-                <field name="invoice_status"/>
-                <field name="state"/>
+                <field name="price_unit" optional="show"/>
+                <field name="delivery_status" optional="show"/>
+                <field name="invoice_status" optional="show"/>
+                <field name="state" optional="show" decoration-success="state == 'sale'" decoration-info="state == 'draft'"
+                       decoration-primary="state == 'sent'" widget="badge"/>
             </xpath>
         </field>
     </record>
