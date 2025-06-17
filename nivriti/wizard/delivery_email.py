@@ -1,5 +1,5 @@
 from odoo import fields, api, models
-import html2text
+# import html2text
 
 
 class EmailDelivery(models.TransientModel):
