@@ -16,7 +16,7 @@
         'views/product_partner.xml',
         'views/crm_view.xml',
         'wizard/delivery_email.xml',
-        # 'wizard/sale_line.xml',
+        'wizard/sale_line.xml',
         'data/data.xml',
     ],
     'installable': True,

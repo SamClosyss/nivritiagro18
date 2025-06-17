@@ -69,15 +69,15 @@ class StockLotInherit(models.Model):
 
     manufacturing_date = fields.Date()
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
-            raise ValidationError("Please note only certain group of users can only edit batch/Lot no .")
-        return super().create(vals_list)
+    # @api.model_create_multi
+    # def create(self, vals_list):
+    #     if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
+    #         raise ValidationError("Please note only certain group of users can only edit batch/Lot no .")
+    #     return super().create(vals_list)
 
     def write(self, vals):
-        if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
-            raise ValidationError("Please note only certain group of users can only edit batch/Lot no .")
+        # if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
+        #     raise ValidationError("Please note only certain group of users can only edit batch/Lot no .")
         return super().write(vals)
 
 
