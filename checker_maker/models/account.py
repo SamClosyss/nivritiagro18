@@ -196,6 +196,7 @@ class AccountPaymentInherit(models.Model):
             request_id = self.env['approval.request'].create(data)
             request_id.action_confirm()
             rec.to_check = True
+            rec.message_post(body="Record has been send for approval")
 
     def action_approve_payment(self):
         self.move_id.action_approve()
