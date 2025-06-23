@@ -33,6 +33,22 @@ class AccountMoveInherit(models.Model):
     def action_update_fpos_values(self):
         pass
 
+    def _get_invoiced_lot_values(self):
+        res = super()._get_invoiced_lot_values()
+        for rec in res:
+            lot_id = self.env['stock.lot'].browse(rec.get('lot_id'))
+            name = lot_id.name
+            if lot_id.expiration_date:
+                name += f" | Exp Dt: {lot_id.expiration_date.strftime('%b, %Y')}"
+            if lot_id.manufacturing_date:
+                name += f" | Mfg Dt: {lot_id.manufacturing_date.strftime('%b, %Y')}"
+            rec['lot_name'] = name
+            rec['product_id'] = lot_id.product_id.id
+            rec[lot_id.product_id.id] = name
+            # rec['expiration_date'] = lot_id.expiration_date and lot_id.expiration_date.strftime('%b, %Y') or ""
+            # rec['manufacturing_date'] = lot_id.manufacturing_date and lot_id.manufacturing_date.strftime('%b, %Y') or ""
+        return res
+
     # Over ride the function to
     @api.depends('move_type', 'partner_id', 'company_id')
     def _compute_narration(self):
