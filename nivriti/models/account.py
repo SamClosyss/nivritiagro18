@@ -195,7 +195,7 @@ class AccountMoveLinesInherit(models.Model):
 #         invoice_ids = self._context.get('active_ids')
 #         res = super().action_create_payments()
 #         payments = self.env['account.payment'].search([('invoice_ids', 'in', invoice_ids),
-#         ('create_date', '>=', fields.Datetime.now() - timedelta(seconds=5))], order='create_date desc')
+#         ('create_date', '>=', fields.Datetime.now() - timedelta(seconds=5))   ], order='create_date desc')
 #         for payment in payments:
 #             if payment and payment.company_id.payment_approval:
 #                 payment.action_send_for_approval()

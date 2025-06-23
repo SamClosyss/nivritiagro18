@@ -49,7 +49,7 @@
             </xpath>
              <xpath expr="//header" position="inside">
                 <button string="Send for Approval" name="action_send_for_approval" type="object" class="btn-primary"
-                invisible="to_check == True or state in ('posted', 'cancel')"/>
+                invisible="to_check == True or state != 'draft'"/>
                 <button string="Approve" name="action_approve_payment" type="object" class="btn-sm btn-success" invisible="approval_status != 'pending'"/>
                 <button string="Refuse" name="action_refuse_payment" type="object" class="btn-sm btn-danger" invisible="approval_status != 'pending'"/>
                 <button string="Withdraw" name="action_withdraw" type="object" class="btn-sm btn-secondary" invisible="approval_status not in ('refused', 'approved')"/>
