@@ -72,8 +72,7 @@ class StockLotInherit(models.Model):
 
     def check_lot_access(self):
         for rec in self:
-            if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
-                rec.lot_create_access = True
+            rec.lot_create_access = True if not self.env.user.has_group('nivriti.lot_and_serial_editable') else False
 
 
 class StockMoveInherit(models.Model):
