@@ -70,6 +70,7 @@ class StockLotInherit(models.Model):
     manufacturing_date = fields.Date()
     lot_create_access = fields.Boolean(compute="check_lot_access")
 
+    @api.depends('create_uid')
     def check_lot_access(self):
         for rec in self:
             if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
