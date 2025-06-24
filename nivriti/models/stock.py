@@ -69,8 +69,9 @@ class StockLotInherit(models.Model):
 
     manufacturing_date = fields.Date()
     lot_create_access = fields.Boolean(compute="check_lot_access")
+    user_name = fields.Many2one('res.users',default=lambda self: self.env.user)
 
-    @api.depends('create_uid')
+    @api.depends('user_name')
     def check_lot_access(self):
         for rec in self:
             if not self.env.user.has_group('nivriti.lot_and_serial_editable'):
