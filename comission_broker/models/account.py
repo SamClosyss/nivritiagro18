@@ -21,7 +21,7 @@ class InheritAccountMove(models.Model):
         return {
             'name': _("Vendor Bills"),
             'type': 'ir.actions.act_window',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'res_model': 'account.move',
             'view_id': self.env.ref('account.view_in_invoice_bill_tree').id,
             'domain': [('id', 'in', self.vendor_bill_ids.ids)],
