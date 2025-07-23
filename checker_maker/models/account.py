@@ -76,9 +76,13 @@ class AccountMoveInherited(models.Model):
                                   f"Please click on Apply Manual Exchange and enter the Conversion Rate.")
         for rec in self:
             request_id = self.env['approval.request'].search([('account_move_id', '=', rec.id),
-                                                              ('model_name', '=', rec._name),
-                                                              ('request_status', '=', 'new')])
+                                                              ('model_name', '=', rec._name)])
             if request_id:
+                print("founnnnd")
+                request_id.write({'request_status': 'new'})
+                request_id.approver_ids.write({'status': 'new'})
+                request_id._update_next_approvers('pending', request_id.approver_ids, only_next_approver=True)
+
                 request_id.action_confirm()
                 rec.to_check = True
                 continue
@@ -97,6 +101,7 @@ class AccountMoveInherited(models.Model):
             rec.to_check = True
 
     def action_approve(self):
+        print("bbbbbbbbbbbbbbbbbbbbb")
         request_id = self.env['approval.approver'].search([('status', '=', 'pending'),
                                                           ('user_id', '=', self.env.user.id),
                                                           ('model_name', '=', 'account.move'),

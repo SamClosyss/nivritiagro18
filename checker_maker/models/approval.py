@@ -34,6 +34,14 @@ class ApprovalRequestInherit(models.Model):
         return res
 
 
+    def action_refuse(self, approver=None):
+        res = super().action_refuse(approver=approver)
+        account_move_ids = self.env['account.move'].browse(self.mapped('account_move_id'))
+        if account_move_ids:
+            account_move_ids.write({'to_check': False})
+        return res
+
+
 class ApprovalApproveInherit(models.Model):
     _inherit = 'approval.approver'
 
