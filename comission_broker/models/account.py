@@ -29,9 +29,21 @@ class InheritAccountMove(models.Model):
             'context': {'create': False}
         }
 
-    def action_print_pdf(self):
-        print(self.invoice_payments_widget)
-        return super().action_print_pdf()
+    def js_assign_outstanding_line(self, line_id):
+        print(line_id, 'line ID')
+        result = super().js_assign_outstanding_line(line_id)
+        self.ensure_one()
+        lines = self.env['account.move.line'].browse(line_id)
+        print(lines, 'lines')
+        credit_moves = lines.mapped('move_id').filtered(lambda m: m.move_type == 'out_refund')
+        print(credit_moves, 'credit moves')
+
+        for credit_move in credit_moves:
+            print(credit_move)
+            if not credit_move.reversed_entry_id:
+                credit_move.reversed_entry_id = self
+
+        return result
 
     # code written by sanmeet
     @api.depends('amount_untaxed', 'broker_value', 'reversal_move_ids')
