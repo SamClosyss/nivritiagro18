@@ -101,7 +101,6 @@ class AccountMoveInherited(models.Model):
             rec.to_check = True
 
     def action_approve(self):
-        print("bbbbbbbbbbbbbbbbbbbbb")
         request_id = self.env['approval.approver'].search([('status', '=', 'pending'),
                                                           ('user_id', '=', self.env.user.id),
                                                           ('model_name', '=', 'account.move'),

@@ -29,6 +29,11 @@ class InheritAccountMove(models.Model):
             'context': {'create': False}
         }
 
+    def action_print_pdf(self):
+        print(self.invoice_payments_widget)
+        return super().action_print_pdf()
+
+    # code written by sanmeet
     @api.depends('amount_untaxed', 'broker_value', 'reversal_move_ids')
     def compute_brokerage_amount(self):
         for rec in self:
@@ -50,7 +55,7 @@ class InheritAccountMove(models.Model):
             payment = 0
             if rec.account_payment_ids:
                 payment = sum(rec.account_payment_ids.filtered(lambda x: x.state == 'posted').mapped('amount'))
-            if rec.reversal_move_ids:
+            if rec.reversal_move_ids and payment:
                 value = (payment / (rec.amount_total - sum(rec.reversal_move_ids.mapped('amount_total')))) * 100
             rec.brokerage_payable = (((value / 100) * rec.brokerage_amt) - rec.brokerage_paid)
             # paid_value = rec.brokerage_payable - ((rec.amount_total - rec.untaxed_amount) - (100 - ratio) * 100)

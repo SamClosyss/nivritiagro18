@@ -7,38 +7,38 @@
                 <div class="row">
                     <div class="col-6">
                         <div style="border: 2px solid black; padding: 2px">
-                                                <strong style="padding: 2px" class="header_text">Bank Details:
-                                                </strong>
-                                                <br/>
-                                                <b style="padding: 2px" class="content_text">Account Name :
-                                                </b>
-                                                <span class="content_text">Nivriti Agro Foods Private Limited
-                                                </span>
-                                                <br/>
-                                                <b style="padding: 2px" class="content_text">Account No.:</b>
-                                                <span class="content_text">102251000032</span>
-                                                <br/>
-                                                <b style="padding: 2px" class="content_text">Account Type
-                                                </b>
-                                                <span class="content_text">Cash Credit
-                                                </span>
-                                                <br/>
-                                                <b style="padding: 2px" class="content_text">Bank Name &amp;
-                                                    Br:
-                                                </b>
-                                                <span class="content_text">ICICI BANK
-                                                </span>
-                                                <br/>
+                            <strong style="padding: 2px" class="header_text">Bank Details:
+                            </strong>
+                            <br/>
+                            <b style="padding: 2px" class="content_text">Account Name :
+                            </b>
+                            <span class="content_text">Nivriti Agro Foods Private Limited
+                            </span>
+                            <br/>
+                            <b style="padding: 2px" class="content_text">Account No.:</b>
+                            <span class="content_text">102251000032</span>
+                            <br/>
+                            <b style="padding: 2px" class="content_text">Account Type
+                            </b>
+                            <span class="content_text">Cash Credit
+                            </span>
+                            <br/>
+                            <b style="padding: 2px" class="content_text">Bank Name &amp;
+                                Br:
+                            </b>
+                            <span class="content_text">ICICI BANK
+                            </span>
+                            <br/>
 
-                                                <b style="padding: 2px" class="content_text">Branch:</b>
-                                                <span class="content_text">
-                                                    MUMBAI CHANDIVALI
-                                                </span>
-                                                <br/>
-                                                <b style="padding: 2px" class="content_text">IFSC:</b>
-                                                <span class="content_text">ICIC0001022</span>
+                            <b style="padding: 2px" class="content_text">Branch:</b>
+                            <span class="content_text">
+                                MUMBAI CHANDIVALI
+                            </span>
+                            <br/>
+                            <b style="padding: 2px" class="content_text">IFSC:</b>
+                            <span class="content_text">ICIC0001022</span>
 
-                                            </div>
+                        </div>
                     </div>
                     <div class="col-6">
                         <div id="total" class="row" name="total">
@@ -57,40 +57,79 @@
     </template>
 
     <template id="header_footer_custom">
+        <!--        <div class="row mt-n3">-->
+        <!--            &lt;!&ndash;                <span t-field="company.company_details"/><br/>&ndash;&gt;-->
+        <!--            <span t-field="company.name"/>-->
+        <!--            <br/>-->
+        <!--            <span class="" t-if="company.street" t-field="company.street"/>-->
+        <!--            <br t-if="company.street"/>-->
+        <!--            <span class="" t-if="company.street2" t-field="company.street2"/>-->
+        <!--            <br t-if="company.street2"/>-->
+        <!--            <span class="" t-if="company.city" t-field="company.city"/>-->
+        <!--            <span class="" t-if="company.zip" t-field="company.zip"/>-->
+        <!--            <br t-if="company.zip"/>-->
+        <!--            <span class="" t-if="company.state_id.name" t-field="company.state_id.name"/>-->
+        <!--            <span class="" t-if="company.country_id.name" t-field="company.country_id.name"/>-->
+        <!--            <br/>-->
+        <!--            <span>-->
+        <!--                <t t-if="company.phone">-->
+        <!--                    <i class='oi oi-voip' style='font-size:15px'/>:-->
+        <!--                    <span class="" t-if="company.phone" t-field="company.phone"/>&#160;|&#160;-->
+        <!--                </t>-->
+        <!--                <br t-if="company.phone"/>-->
+        <!--                <t t-if="company.email">-->
+        <!--                    <i class='fa fa-envelope' style='font-size:15px'/>:-->
+        <!--                    <span t-if="company.email" t-field="company.email"/>&#160;|&#160;-->
+        <!--                </t>-->
+        <!--                <br t-if="company.email"/>-->
+        <!--                <t t-if="company.website">-->
+        <!--                    <span>W:&#160;</span>-->
+        <!--                    <i class="fa fa-globe-pointer"/>-->
+        <!--                    <span t-if="company.website" t-field="company.website"/>&#160;|&#160;-->
+        <!--                </t>-->
+        <!--                <br t-if="company.website"/>-->
+        <!--                <t t-if="company.vat">-->
+        <!--                    <span>GSTIN</span>-->
+        <!--                    <span t-field="company.vat"/>-->
+        <!--                </t>-->
+        <!--            </span>-->
+        <!--        </div>-->
+        <t t-set="res_company" t-value="company.company_id if 'company_id' in company else company"/>
         <div class="row mt-n3">
-            <!--                <span t-field="company.company_details"/><br/>-->
-            <span t-field="company.name"/>
+            <span t-field="res_company.name"/>
             <br/>
-            <span class="" t-if="company.street" t-field="company.street"/>
-            <br t-if="company.street"/>
-            <span class="" t-if="company.street2" t-field="company.street2"/>
-            <br t-if="company.street2"/>
-            <span class="" t-if="company.city" t-field="company.city"/>
-            <span class="" t-if="company.zip" t-field="company.zip"/>
-            <br t-if="company.zip"/>
-            <span class="" t-if="company.state_id.name" t-field="company.state_id.name"/>
-            <span class="" t-if="company.country_id.name" t-field="company.country_id.name"/>
+            <span t-if="res_company.street" t-field="res_company.street"/>
+            <br t-if="res_company.street"/>
+            <span t-if="res_company.street2" t-field="res_company.street2"/>
+            <br t-if="res_company.street2"/>
+            <span t-if="res_company.city" t-field="res_company.city"/>
+            <span t-if="res_company.zip">-
+                <span t-field="res_company.zip"/>
+            </span>
+            <br t-if="res_company.zip"/>
+            <span t-if="res_company.state_id" t-field="res_company.state_id.name"/>
+            <span t-if="res_company.country_id" t-field="res_company.country_id.name"/>
             <br/>
             <span>
-                <t t-if="company.phone">
+                <t t-if="res_company.phone">
                     <i class='oi oi-voip' style='font-size:15px'/>:
-                    <span class="" t-if="company.phone" t-field="company.phone"/>&#160;|&#160;
+                    <span t-field="res_company.phone"/>&#160;|&#160;
                 </t>
-                <br t-if="company.phone"/>
-                <t t-if="company.email">
+                <br t-if="res_company.phone"/>
+                <t t-if="res_company.email">
                     <i class='fa fa-envelope' style='font-size:15px'/>:
-                    <span t-if="company.email" t-field="company.email"/>&#160;|&#160;
+                    <span t-field="res_company.email"/>&#160;|&#160;
                 </t>
-                <br t-if="company.email"/>
-                <t t-if="company.website">
+                <br t-if="res_company.email"/>
+                <t t-if="res_company.website">
                     <span>W:&#160;</span>
                     <i class="fa fa-globe-pointer"/>
-                    <span t-if="company.website" t-field="company.website"/>&#160;|&#160;
+                    <span t-field="res_company.website"/>&#160;|&#160;
                 </t>
-                <br t-if="company.website"/>
-                <t t-if="company.vat">
-                    <span>GSTIN</span>
-                    <span t-field="company.vat"/>
+                <br t-if="res_company.website"/>
+                <t t-if="res_company.vat">
+                    <span>GSTIN:</span>
+                    <span t-field="res_company.vat"/>
                 </t>
             </span>
         </div>
