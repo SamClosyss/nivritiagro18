@@ -1,5 +1,5 @@
 {
-    'name': 'JK Botanical Contra Entries',
+    'name': 'Nivriti Contra Entries',
     'depends': ['account'],
     'author': 'Closyss Technologies',
     'data': [
