@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="partner_ledger_wizard_report" model="ir.ui.view">
+        <field name="name">excel.register.report.wizard.report</field>
+        <field name="model">excel.register.report</field>
+        <field name="arch" type="xml">
+            <form string="Partner Ledger">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                        <field name="partner_id" readonly="1" force_save="1" invisible="'partner_id', '=', False"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="journal_id" string="Journal" invisible="type not in ['sales_register','purchase_register','detail_purchase_register','detail_sales_register']"
+                               options="{'no_create': True,'no_open': True, 'no_edit': True}"
+                               required="'type', 'in', ['sales_register','purchase_register','detail_purchase_register','detail_sales_register']"
+                               domain="[('type', '=', context.get('journal_type'))]" widget="many2many_tags"/>
+                    </group>
+                </group>
+
+                <footer>
+                    <button name="print_report" type="object" string="Download" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_sale_partner_ledger" model="ir.actions.server">
+        <field name="name">Partner Ledger</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">action = record.sale_partner_ledger()</field>
+    </record>
+
+    <record id="action_detail_sales_register" model="ir.actions.act_window">
+        <field name="name">Detailed Sales Register</field>
+        <field name="res_model">excel.register.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_partner_id': False, 'default_type': 'detail_sales_register', 'move_type':
+            'sales','journal_type':'sale'}
+        </field>
+    </record>
+
+    <record id="action_sales_register" model="ir.actions.act_window">
+        <field name="name">Sales Register</field>
+        <field name="res_model">excel.register.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_partner_id': False, 'default_type': 'sales_register','move_type': 'sales',
+            'journal_type':'sale'}
+        </field>
+    </record>
+
+    <menuitem id="menu_detail_register_report" name="Detail Sales Register" parent="account.menu_finance_receivables"
+              action="action_detail_sales_register" sequence="150"/>
+    <menuitem id="menu_register_report" name="Sales Register" parent="account.menu_finance_receivables"
+              action="action_sales_register" sequence="150"/>
+
+    <!--    Purchase Register-->
+
+
+    <record id="action_detail_purchase_register" model="ir.actions.act_window">
+        <field name="name">Detailed Purchase Register</field>
+        <field name="res_model">excel.register.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_partner_id': False, 'default_type': 'detail_purchase_register','move_type':
+            'purchase','journal_type':'purchase'}
+        </field>
+    </record>
+
+    <record id="action_purchase_register" model="ir.actions.act_window">
+        <field name="name">Purchase Register</field>
+        <field name="res_model">excel.register.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_partner_id': False, 'default_type': 'purchase_register','move_type': 'purchase',
+            'journal_type':'purchase'}
+        </field>
+    </record>
+
+    <menuitem id="menu_detail_purchase_report" name="Detail Purchase Register" parent="account.menu_finance_payables"
+              action="action_detail_purchase_register" sequence="150"/>
+    <menuitem id="menu_purchase_report" name="Purchase Register" parent="account.menu_finance_payables"
+              action="action_purchase_register" sequence="150"/>
+</odoo>
